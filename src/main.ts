@@ -27,14 +27,18 @@ import Wallet from "./klaytn/Wallet";
 
         el("h3", "인절미 떡크노믹스"),
         el("p", "토큰 전송 시 10% 떼감 -> 9%는 홀더들한테 떡돌림, 1%는 떡방앗간에 팁으로 제공 (팁은 이벤트, 에드, 기부, 개발자 사리사욕에 쓰임)"),
-        el("a", "인절미 카이카스 지갑에 추가 (클립은 영원히 지원 계획이 없습니다.)", {
-            click: () => Wallet.addToken(
-                InjeolmiContract.address,
-                "IJM",
-                8,
-                "https://raw.githubusercontent.com/ricecakemill/rcm-app/main/docs/images/injeolmi.png",
-            ),
-        }),
+        el(".links",
+            el("a", "인절미 카이카스 지갑에 추가 (클립은 영원히 지원 계획이 없습니다.)", {
+                click: () => Wallet.addToken(
+                    InjeolmiContract.address,
+                    "IJM",
+                    8,
+                    "https://raw.githubusercontent.com/ricecakemill/rcm-app/main/docs/images/injeolmi.png",
+                ),
+            }), "\n",
+            el("a", "스마트 콘트랙트 주소: 0x9CFc059F64D664F92f3d0329844B8ccca4E5215B", { href: "https://scope.klaytn.com/token/0x9CFc059F64D664F92f3d0329844B8ccca4E5215B", target: "_blank" }), "\n",
+            el("a", "소스 코드", { href: "https://github.com/ricecakemill/injeolmi", target: "_blank" }),
+        ),
         el("p",
             "인절미 가격 = ", priceDisplay = el("span", "..."), " KLAY\n",
             "남은 에어드롭 물량 = ", airdropDisplay = el("span", "..."), " IJM",
