@@ -1,8 +1,21 @@
-import { BodyNode, el } from "@hanul/skynode";
+import { BodyNode, DomNode, el } from "@hanul/skynode";
+import { BigNumber, utils } from "ethers";
+import AirdropContract from "./contracts/AirdropContract";
 import InjeolmiContract from "./contracts/InjeolmiContract";
+import InjeolmiPoolContract from "./contracts/InjeolmiPoolContract";
 import Wallet from "./klaytn/Wallet";
 
 (async () => {
+
+    let priceDisplay;
+    let airdropDisplay;
+    let ijmPrice: BigNumber;
+
+    let buyInput: DomNode<HTMLInputElement>;
+    let buyResult: DomNode;
+
+    let sellInput: DomNode<HTMLInputElement>;
+    let sellResult: DomNode;
 
     BodyNode.append(
         el("h1", "떡방앗간.닷컴"),
@@ -14,19 +27,51 @@ import Wallet from "./klaytn/Wallet";
 
         el("h3", "인절미 떡크노믹스"),
         el("p", "토큰 전송 시 10% 떼감 -> 9%는 홀더들한테 떡돌림, 1%는 떡방앗간에 팁으로 제공 (팁은 이벤트, 에드, 기부, 개발자 사리사욕에 쓰임)"),
-        el("a", "인절미 카이카스 지갑에 추가 (클립은 영원히 지원 계획이 없습니다.)"),
-        el("p", "인절미 가격 = 0.1 KLAY"),
+        el("a", "인절미 카이카스 지갑에 추가 (클립은 영원히 지원 계획이 없습니다.)", {
+            click: () => Wallet.addToken(
+                InjeolmiContract.address,
+                "IJM",
+                8,
+                "https://raw.githubusercontent.com/ricecakemill/rcm-app/main/docs/images/injeolmi.png",
+            ),
+        }),
+        el("p",
+            "인절미 가격 = ", priceDisplay = el("span", "..."), " KLAY\n",
+            "남은 에어드롭 물량 = ", airdropDisplay = el("span", "..."), " IJM",
+        ),
 
-        el("h3", "인절미 클레이로 사기"),
+        el("h3", "클레이로 인절미 사기"),
         el("p", "인절미를 살때도 떡크노믹스 때문에 10%를 적게 받습니다."),
         el(".form",
-            "TODO:"
+            buyInput = el("input", { placeholder: "KLAY 수량" }, {
+                keyup: () => {
+                    const value = utils.parseEther(buyInput.domElement.value);
+                    buyResult.empty().appendText(`대략 ${utils.formatEther(value.mul(utils.parseEther("1")).div(ijmPrice).mul(9).div(10))} IJM`);
+                },
+            }),
+            buyResult = el(".result"),
+            el("button", "사기", {
+                click: async () => {
+                    await InjeolmiPoolContract.swapToIJM(utils.parseEther(buyInput.domElement.value));
+                },
+            }),
         ),
 
         el("h3", "인절미 클레이로 팔기"),
         el("p", "인절미를 펄때도 떡크노믹스 때문에 10%를 적게 받습니다."),
         el(".form",
-            "TODO:"
+            sellInput = el("input", { placeholder: "IJM 수량" }, {
+                keyup: () => {
+                    const value = utils.parseEther(sellInput.domElement.value);
+                    sellResult.empty().appendText(`대략 ${utils.formatEther(value.mul(ijmPrice).div(utils.parseEther("1")).mul(9).div(10))} KLAY`);
+                },
+            }),
+            sellResult = el(".result"),
+            el("button", "팔기", {
+                click: async () => {
+                    await InjeolmiPoolContract.swapToKlay(utils.parseUnits(sellInput.domElement.value, 8));
+                },
+            }),
         ),
 
         el("h2", "떡 NFT"),
@@ -42,8 +87,13 @@ import Wallet from "./klaytn/Wallet";
     if (await Wallet.connected() !== true) {
         await Wallet.connect();
     }
-    const owner = await Wallet.loadAddress();
-    if (owner !== undefined) {
-        console.log(await InjeolmiContract.balanceOf(owner));
+
+    const ijmBalance = await InjeolmiContract.balanceOf(InjeolmiPoolContract.address);
+    const klayBalance = await Wallet.balanceOf(InjeolmiPoolContract.address);
+    if (klayBalance !== undefined) {
+        ijmPrice = klayBalance.mul(utils.parseUnits("1", 8)).div(ijmBalance);
+        priceDisplay.empty().appendText(utils.formatEther(ijmPrice));
     }
+
+    airdropDisplay.empty().appendText(utils.formatUnits(await InjeolmiContract.balanceOf(AirdropContract.address), 8));
 })();

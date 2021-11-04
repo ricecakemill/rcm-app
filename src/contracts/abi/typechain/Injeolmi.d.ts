@@ -24,13 +24,25 @@ interface InjeolmiInterface extends ethers.utils.Interface {
   functions: {
     "name()": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
+    "accMultiplier()": FunctionFragment;
     "totalSupply()": FunctionFragment;
     "transferFrom(address,address,uint256)": FunctionFragment;
+    "updateMultiplier(address[])": FunctionFragment;
     "DECIMALS()": FunctionFragment;
     "decimals()": FunctionFragment;
+    "unpause()": FunctionFragment;
+    "finishUpdatingMultiplier()": FunctionFragment;
+    "excluded(address)": FunctionFragment;
+    "isPauser(address)": FunctionFragment;
     "exclude(address)": FunctionFragment;
+    "paused()": FunctionFragment;
+    "renouncePauser()": FunctionFragment;
+    "_userInfo(address)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
+    "resettingCount()": FunctionFragment;
+    "addPauser(address)": FunctionFragment;
+    "pause()": FunctionFragment;
     "owner()": FunctionFragment;
     "isOwner()": FunctionFragment;
     "symbol()": FunctionFragment;
@@ -49,6 +61,10 @@ interface InjeolmiInterface extends ethers.utils.Interface {
     values: [string, BigNumberish]
   ): string;
   encodeFunctionData(
+    functionFragment: "accMultiplier",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "totalSupply",
     values?: undefined
   ): string;
@@ -56,14 +72,37 @@ interface InjeolmiInterface extends ethers.utils.Interface {
     functionFragment: "transferFrom",
     values: [string, string, BigNumberish]
   ): string;
+  encodeFunctionData(
+    functionFragment: "updateMultiplier",
+    values: [string[]]
+  ): string;
   encodeFunctionData(functionFragment: "DECIMALS", values?: undefined): string;
   encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
+  encodeFunctionData(functionFragment: "unpause", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "finishUpdatingMultiplier",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "excluded", values: [string]): string;
+  encodeFunctionData(functionFragment: "isPauser", values: [string]): string;
   encodeFunctionData(functionFragment: "exclude", values: [string]): string;
+  encodeFunctionData(functionFragment: "paused", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "renouncePauser",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "_userInfo", values: [string]): string;
   encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
   encodeFunctionData(
     functionFragment: "renounceOwnership",
     values?: undefined
   ): string;
+  encodeFunctionData(
+    functionFragment: "resettingCount",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "addPauser", values: [string]): string;
+  encodeFunctionData(functionFragment: "pause", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "isOwner", values?: undefined): string;
   encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
@@ -87,6 +126,10 @@ interface InjeolmiInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(
+    functionFragment: "accMultiplier",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "totalSupply",
     data: BytesLike
   ): Result;
@@ -94,14 +137,37 @@ interface InjeolmiInterface extends ethers.utils.Interface {
     functionFragment: "transferFrom",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "updateMultiplier",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "DECIMALS", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "unpause", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "finishUpdatingMultiplier",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "excluded", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "isPauser", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "exclude", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "paused", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "renouncePauser",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "_userInfo", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "renounceOwnership",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "resettingCount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "addPauser", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "pause", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "isOwner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
@@ -119,11 +185,19 @@ interface InjeolmiInterface extends ethers.utils.Interface {
   events: {
     "Transfer(address,address,uint256)": EventFragment;
     "Approval(address,address,uint256)": EventFragment;
+    "Paused(address)": EventFragment;
+    "Unpaused(address)": EventFragment;
+    "PauserAdded(address)": EventFragment;
+    "PauserRemoved(address)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Paused"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Unpaused"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "PauserAdded"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "PauserRemoved"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
 }
 
@@ -157,6 +231,10 @@ export class Injeolmi extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
+    accMultiplier(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "accMultiplier()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     totalSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "totalSupply()"(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -175,6 +253,16 @@ export class Injeolmi extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
+    updateMultiplier(
+      _addresses: string[],
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    "updateMultiplier(address[])"(
+      _addresses: string[],
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
     DECIMALS(overrides?: CallOverrides): Promise<[number]>;
 
     "DECIMALS()"(overrides?: CallOverrides): Promise<[number]>;
@@ -183,12 +271,68 @@ export class Injeolmi extends Contract {
 
     "decimals()"(overrides?: CallOverrides): Promise<[number]>;
 
+    unpause(overrides?: Overrides): Promise<ContractTransaction>;
+
+    "unpause()"(overrides?: Overrides): Promise<ContractTransaction>;
+
+    finishUpdatingMultiplier(
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    "finishUpdatingMultiplier()"(
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    excluded(arg0: string, overrides?: CallOverrides): Promise<[boolean]>;
+
+    "excluded(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    isPauser(account: string, overrides?: CallOverrides): Promise<[boolean]>;
+
+    "isPauser(address)"(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
     exclude(addr: string, overrides?: Overrides): Promise<ContractTransaction>;
 
     "exclude(address)"(
       addr: string,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
+
+    paused(overrides?: CallOverrides): Promise<[boolean]>;
+
+    "paused()"(overrides?: CallOverrides): Promise<[boolean]>;
+
+    renouncePauser(overrides?: Overrides): Promise<ContractTransaction>;
+
+    "renouncePauser()"(overrides?: Overrides): Promise<ContractTransaction>;
+
+    _userInfo(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber] & {
+        lastBalance: BigNumber;
+        lastMultiplier: BigNumber;
+        resettingCount: BigNumber;
+      }
+    >;
+
+    "_userInfo(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber] & {
+        lastBalance: BigNumber;
+        lastMultiplier: BigNumber;
+        resettingCount: BigNumber;
+      }
+    >;
 
     balanceOf(
       user: string,
@@ -203,6 +347,24 @@ export class Injeolmi extends Contract {
     renounceOwnership(overrides?: Overrides): Promise<ContractTransaction>;
 
     "renounceOwnership()"(overrides?: Overrides): Promise<ContractTransaction>;
+
+    resettingCount(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "resettingCount()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    addPauser(
+      account: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    "addPauser(address)"(
+      account: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    pause(overrides?: Overrides): Promise<ContractTransaction>;
+
+    "pause()"(overrides?: Overrides): Promise<ContractTransaction>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
@@ -286,6 +448,10 @@ export class Injeolmi extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
+  accMultiplier(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "accMultiplier()"(overrides?: CallOverrides): Promise<BigNumber>;
+
   totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
   "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -304,6 +470,16 @@ export class Injeolmi extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
+  updateMultiplier(
+    _addresses: string[],
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  "updateMultiplier(address[])"(
+    _addresses: string[],
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
   DECIMALS(overrides?: CallOverrides): Promise<number>;
 
   "DECIMALS()"(overrides?: CallOverrides): Promise<number>;
@@ -312,12 +488,66 @@ export class Injeolmi extends Contract {
 
   "decimals()"(overrides?: CallOverrides): Promise<number>;
 
+  unpause(overrides?: Overrides): Promise<ContractTransaction>;
+
+  "unpause()"(overrides?: Overrides): Promise<ContractTransaction>;
+
+  finishUpdatingMultiplier(overrides?: Overrides): Promise<ContractTransaction>;
+
+  "finishUpdatingMultiplier()"(
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  excluded(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+
+  "excluded(address)"(
+    arg0: string,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  isPauser(account: string, overrides?: CallOverrides): Promise<boolean>;
+
+  "isPauser(address)"(
+    account: string,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
   exclude(addr: string, overrides?: Overrides): Promise<ContractTransaction>;
 
   "exclude(address)"(
     addr: string,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
+
+  paused(overrides?: CallOverrides): Promise<boolean>;
+
+  "paused()"(overrides?: CallOverrides): Promise<boolean>;
+
+  renouncePauser(overrides?: Overrides): Promise<ContractTransaction>;
+
+  "renouncePauser()"(overrides?: Overrides): Promise<ContractTransaction>;
+
+  _userInfo(
+    arg0: string,
+    overrides?: CallOverrides
+  ): Promise<
+    [BigNumber, BigNumber, BigNumber] & {
+      lastBalance: BigNumber;
+      lastMultiplier: BigNumber;
+      resettingCount: BigNumber;
+    }
+  >;
+
+  "_userInfo(address)"(
+    arg0: string,
+    overrides?: CallOverrides
+  ): Promise<
+    [BigNumber, BigNumber, BigNumber] & {
+      lastBalance: BigNumber;
+      lastMultiplier: BigNumber;
+      resettingCount: BigNumber;
+    }
+  >;
 
   balanceOf(user: string, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -329,6 +559,24 @@ export class Injeolmi extends Contract {
   renounceOwnership(overrides?: Overrides): Promise<ContractTransaction>;
 
   "renounceOwnership()"(overrides?: Overrides): Promise<ContractTransaction>;
+
+  resettingCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "resettingCount()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  addPauser(
+    account: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  "addPauser(address)"(
+    account: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  pause(overrides?: Overrides): Promise<ContractTransaction>;
+
+  "pause()"(overrides?: Overrides): Promise<ContractTransaction>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
@@ -412,6 +660,10 @@ export class Injeolmi extends Contract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
+    accMultiplier(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "accMultiplier()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -430,6 +682,16 @@ export class Injeolmi extends Contract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
+    updateMultiplier(
+      _addresses: string[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "updateMultiplier(address[])"(
+      _addresses: string[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     DECIMALS(overrides?: CallOverrides): Promise<number>;
 
     "DECIMALS()"(overrides?: CallOverrides): Promise<number>;
@@ -438,9 +700,61 @@ export class Injeolmi extends Contract {
 
     "decimals()"(overrides?: CallOverrides): Promise<number>;
 
+    unpause(overrides?: CallOverrides): Promise<void>;
+
+    "unpause()"(overrides?: CallOverrides): Promise<void>;
+
+    finishUpdatingMultiplier(overrides?: CallOverrides): Promise<void>;
+
+    "finishUpdatingMultiplier()"(overrides?: CallOverrides): Promise<void>;
+
+    excluded(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+
+    "excluded(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    isPauser(account: string, overrides?: CallOverrides): Promise<boolean>;
+
+    "isPauser(address)"(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
     exclude(addr: string, overrides?: CallOverrides): Promise<void>;
 
     "exclude(address)"(addr: string, overrides?: CallOverrides): Promise<void>;
+
+    paused(overrides?: CallOverrides): Promise<boolean>;
+
+    "paused()"(overrides?: CallOverrides): Promise<boolean>;
+
+    renouncePauser(overrides?: CallOverrides): Promise<void>;
+
+    "renouncePauser()"(overrides?: CallOverrides): Promise<void>;
+
+    _userInfo(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber] & {
+        lastBalance: BigNumber;
+        lastMultiplier: BigNumber;
+        resettingCount: BigNumber;
+      }
+    >;
+
+    "_userInfo(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber] & {
+        lastBalance: BigNumber;
+        lastMultiplier: BigNumber;
+        resettingCount: BigNumber;
+      }
+    >;
 
     balanceOf(user: string, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -452,6 +766,21 @@ export class Injeolmi extends Contract {
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
     "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
+
+    resettingCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "resettingCount()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    addPauser(account: string, overrides?: CallOverrides): Promise<void>;
+
+    "addPauser(address)"(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    pause(overrides?: CallOverrides): Promise<void>;
+
+    "pause()"(overrides?: CallOverrides): Promise<void>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
@@ -525,6 +854,14 @@ export class Injeolmi extends Contract {
       amount: null
     ): EventFilter;
 
+    Paused(account: null): EventFilter;
+
+    Unpaused(account: null): EventFilter;
+
+    PauserAdded(account: string | null): EventFilter;
+
+    PauserRemoved(account: string | null): EventFilter;
+
     OwnershipTransferred(
       previousOwner: string | null,
       newOwner: string | null
@@ -548,6 +885,10 @@ export class Injeolmi extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
+    accMultiplier(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "accMultiplier()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -566,6 +907,16 @@ export class Injeolmi extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
+    updateMultiplier(
+      _addresses: string[],
+      overrides?: Overrides
+    ): Promise<BigNumber>;
+
+    "updateMultiplier(address[])"(
+      _addresses: string[],
+      overrides?: Overrides
+    ): Promise<BigNumber>;
+
     DECIMALS(overrides?: CallOverrides): Promise<BigNumber>;
 
     "DECIMALS()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -574,9 +925,46 @@ export class Injeolmi extends Contract {
 
     "decimals()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    unpause(overrides?: Overrides): Promise<BigNumber>;
+
+    "unpause()"(overrides?: Overrides): Promise<BigNumber>;
+
+    finishUpdatingMultiplier(overrides?: Overrides): Promise<BigNumber>;
+
+    "finishUpdatingMultiplier()"(overrides?: Overrides): Promise<BigNumber>;
+
+    excluded(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    "excluded(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    isPauser(account: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    "isPauser(address)"(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     exclude(addr: string, overrides?: Overrides): Promise<BigNumber>;
 
     "exclude(address)"(addr: string, overrides?: Overrides): Promise<BigNumber>;
+
+    paused(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "paused()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    renouncePauser(overrides?: Overrides): Promise<BigNumber>;
+
+    "renouncePauser()"(overrides?: Overrides): Promise<BigNumber>;
+
+    _userInfo(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_userInfo(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     balanceOf(user: string, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -588,6 +976,21 @@ export class Injeolmi extends Contract {
     renounceOwnership(overrides?: Overrides): Promise<BigNumber>;
 
     "renounceOwnership()"(overrides?: Overrides): Promise<BigNumber>;
+
+    resettingCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "resettingCount()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    addPauser(account: string, overrides?: Overrides): Promise<BigNumber>;
+
+    "addPauser(address)"(
+      account: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
+
+    pause(overrides?: Overrides): Promise<BigNumber>;
+
+    "pause()"(overrides?: Overrides): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -669,6 +1072,10 @@ export class Injeolmi extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
+    accMultiplier(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "accMultiplier()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     totalSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "totalSupply()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -687,6 +1094,16 @@ export class Injeolmi extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
+    updateMultiplier(
+      _addresses: string[],
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    "updateMultiplier(address[])"(
+      _addresses: string[],
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
     DECIMALS(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "DECIMALS()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -695,11 +1112,61 @@ export class Injeolmi extends Contract {
 
     "decimals()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    unpause(overrides?: Overrides): Promise<PopulatedTransaction>;
+
+    "unpause()"(overrides?: Overrides): Promise<PopulatedTransaction>;
+
+    finishUpdatingMultiplier(
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    "finishUpdatingMultiplier()"(
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    excluded(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "excluded(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    isPauser(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "isPauser(address)"(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     exclude(addr: string, overrides?: Overrides): Promise<PopulatedTransaction>;
 
     "exclude(address)"(
       addr: string,
       overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    paused(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "paused()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    renouncePauser(overrides?: Overrides): Promise<PopulatedTransaction>;
+
+    "renouncePauser()"(overrides?: Overrides): Promise<PopulatedTransaction>;
+
+    _userInfo(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "_userInfo(address)"(
+      arg0: string,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     balanceOf(
@@ -715,6 +1182,26 @@ export class Injeolmi extends Contract {
     renounceOwnership(overrides?: Overrides): Promise<PopulatedTransaction>;
 
     "renounceOwnership()"(overrides?: Overrides): Promise<PopulatedTransaction>;
+
+    resettingCount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "resettingCount()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    addPauser(
+      account: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    "addPauser(address)"(
+      account: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    pause(overrides?: Overrides): Promise<PopulatedTransaction>;
+
+    "pause()"(overrides?: Overrides): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

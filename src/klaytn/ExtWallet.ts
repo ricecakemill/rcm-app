@@ -33,8 +33,13 @@ class ExtWallet extends EventContainer {
         return this.caver === undefined ? -1 : await this.caver.klay.getBlockNumber();
     }
 
+    public async balanceOf(address: string) {
+        return this.caver === undefined ? undefined : BigNumber.from(await this.caver.klay.getBalance(address));
+    }
+
     public async loadBalance() {
-        return BigNumber.from(this.caver === undefined ? -1 : await this.caver.klay.getBalance(await this.loadAddress()));
+        const address = await this.loadAddress();
+        return address === undefined ? BigNumber.from(0) : await this.balanceOf(address);
     }
 
     public async connected() {
@@ -48,6 +53,22 @@ class ExtWallet extends EventContainer {
 
     public createContract(address: string, abi: any) {
         return this.caver === undefined ? undefined : new this.caver.klay.Contract(abi, address);
+    }
+
+    public addToken(
+        address: string,
+        symbol: string,
+        decimals: number,
+        image: string,
+    ) {
+        this.klaytn?.sendAsync({
+            method: "wallet_watchAsset",
+            params: {
+                type: "ERC20",
+                options: { address, symbol, decimals, image },
+            },
+            id: Math.round(Math.random() * 100000),
+        });
     }
 }
 

@@ -9,10 +9,12 @@ declare class ExtWallet extends EventContainer {
     loadAddress(): Promise<string | undefined>;
     loadChainId(): Promise<any>;
     loadBlockNumber(): Promise<any>;
-    loadBalance(): Promise<BigNumber>;
+    balanceOf(address: string): Promise<BigNumber | undefined>;
+    loadBalance(): Promise<BigNumber | undefined>;
     connected(): Promise<boolean>;
     connect(): Promise<void>;
     createContract(address: string, abi: any): any;
+    addToken(address: string, symbol: string, decimals: number, image: string): void;
 }
 declare const _default: ExtWallet;
 export default _default;

@@ -1,3 +1,4 @@
+import { BigNumber } from "@ethersproject/bignumber";
 import EventContainer from "eventcontainer";
 import ExtWallet from "./ExtWallet";
 
@@ -20,6 +21,18 @@ class Wallet extends EventContainer {
         }
     }
 
+    public async loadBalance(): Promise<BigNumber | undefined> {
+        if (ExtWallet.installed === true) {
+            return await ExtWallet.loadBalance();
+        }
+    }
+
+    public async balanceOf(address: string): Promise<BigNumber | undefined> {
+        if (ExtWallet.installed === true) {
+            return await ExtWallet.balanceOf(address);
+        }
+    }
+
     public async connected() {
         return await this.loadAddress() !== undefined;
     }
@@ -29,6 +42,17 @@ class Wallet extends EventContainer {
             return await ExtWallet.connect();
         } else {
             alert("카이카스가 필요합니다. 카이카스를 설치해주시기 바랍니다.");
+        }
+    }
+
+    public async addToken(
+        address: string,
+        symbol: string,
+        decimals: number,
+        image: string,
+    ) {
+        if (ExtWallet.installed === true) {
+            ExtWallet.addToken(address, symbol, decimals, image);
         }
     }
 }

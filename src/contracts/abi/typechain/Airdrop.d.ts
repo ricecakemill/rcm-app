@@ -13,6 +13,7 @@ import {
 import {
   Contract,
   ContractTransaction,
+  Overrides,
   PayableOverrides,
   CallOverrides,
 } from "@ethersproject/contracts";
@@ -23,19 +24,47 @@ import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 interface AirdropInterface extends ethers.utils.Interface {
   functions: {
     "ijm()": FunctionFragment;
+    "renounceOwnership()": FunctionFragment;
+    "owner()": FunctionFragment;
+    "isOwner()": FunctionFragment;
     "airdrop(address[],uint256)": FunctionFragment;
+    "transferOwnership(address)": FunctionFragment;
   };
 
   encodeFunctionData(functionFragment: "ijm", values?: undefined): string;
   encodeFunctionData(
+    functionFragment: "renounceOwnership",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(functionFragment: "isOwner", values?: undefined): string;
+  encodeFunctionData(
     functionFragment: "airdrop",
     values: [string[], BigNumberish]
   ): string;
+  encodeFunctionData(
+    functionFragment: "transferOwnership",
+    values: [string]
+  ): string;
 
   decodeFunctionResult(functionFragment: "ijm", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "isOwner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "airdrop", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
 
-  events: {};
+  events: {
+    "OwnershipTransferred(address,address)": EventFragment;
+  };
+
+  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
 }
 
 export class Airdrop extends Contract {
@@ -56,6 +85,18 @@ export class Airdrop extends Contract {
 
     "ijm()"(overrides?: CallOverrides): Promise<[string]>;
 
+    renounceOwnership(overrides?: Overrides): Promise<ContractTransaction>;
+
+    "renounceOwnership()"(overrides?: Overrides): Promise<ContractTransaction>;
+
+    owner(overrides?: CallOverrides): Promise<[string]>;
+
+    "owner()"(overrides?: CallOverrides): Promise<[string]>;
+
+    isOwner(overrides?: CallOverrides): Promise<[boolean]>;
+
+    "isOwner()"(overrides?: CallOverrides): Promise<[boolean]>;
+
     airdrop(
       to: string[],
       amount: BigNumberish,
@@ -67,11 +108,33 @@ export class Airdrop extends Contract {
       amount: BigNumberish,
       overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
+
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
   };
 
   ijm(overrides?: CallOverrides): Promise<string>;
 
   "ijm()"(overrides?: CallOverrides): Promise<string>;
+
+  renounceOwnership(overrides?: Overrides): Promise<ContractTransaction>;
+
+  "renounceOwnership()"(overrides?: Overrides): Promise<ContractTransaction>;
+
+  owner(overrides?: CallOverrides): Promise<string>;
+
+  "owner()"(overrides?: CallOverrides): Promise<string>;
+
+  isOwner(overrides?: CallOverrides): Promise<boolean>;
+
+  "isOwner()"(overrides?: CallOverrides): Promise<boolean>;
 
   airdrop(
     to: string[],
@@ -85,10 +148,32 @@ export class Airdrop extends Contract {
     overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
+  transferOwnership(
+    newOwner: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  "transferOwnership(address)"(
+    newOwner: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
   callStatic: {
     ijm(overrides?: CallOverrides): Promise<string>;
 
     "ijm()"(overrides?: CallOverrides): Promise<string>;
+
+    renounceOwnership(overrides?: CallOverrides): Promise<void>;
+
+    "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
+
+    owner(overrides?: CallOverrides): Promise<string>;
+
+    "owner()"(overrides?: CallOverrides): Promise<string>;
+
+    isOwner(overrides?: CallOverrides): Promise<boolean>;
+
+    "isOwner()"(overrides?: CallOverrides): Promise<boolean>;
 
     airdrop(
       to: string[],
@@ -101,14 +186,41 @@ export class Airdrop extends Contract {
       amount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    transferOwnership(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
-  filters: {};
+  filters: {
+    OwnershipTransferred(
+      previousOwner: string | null,
+      newOwner: string | null
+    ): EventFilter;
+  };
 
   estimateGas: {
     ijm(overrides?: CallOverrides): Promise<BigNumber>;
 
     "ijm()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    renounceOwnership(overrides?: Overrides): Promise<BigNumber>;
+
+    "renounceOwnership()"(overrides?: Overrides): Promise<BigNumber>;
+
+    owner(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    isOwner(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "isOwner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     airdrop(
       to: string[],
@@ -120,6 +232,16 @@ export class Airdrop extends Contract {
       to: string[],
       amount: BigNumberish,
       overrides?: PayableOverrides
+    ): Promise<BigNumber>;
+
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
+
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: Overrides
     ): Promise<BigNumber>;
   };
 
@@ -127,6 +249,18 @@ export class Airdrop extends Contract {
     ijm(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "ijm()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    renounceOwnership(overrides?: Overrides): Promise<PopulatedTransaction>;
+
+    "renounceOwnership()"(overrides?: Overrides): Promise<PopulatedTransaction>;
+
+    owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    isOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "isOwner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     airdrop(
       to: string[],
@@ -138,6 +272,16 @@ export class Airdrop extends Contract {
       to: string[],
       amount: BigNumberish,
       overrides?: PayableOverrides
+    ): Promise<PopulatedTransaction>;
+
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: Overrides
     ): Promise<PopulatedTransaction>;
   };
 }

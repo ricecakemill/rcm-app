@@ -65,7 +65,7 @@ const _abi = [
       },
     ],
     payable: false,
-    stateMutability: "view",
+    stateMutability: "pure",
     type: "function",
   },
   {
@@ -107,6 +107,52 @@ const _abi = [
     ],
     payable: false,
     stateMutability: "pure",
+    type: "function",
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "user",
+        type: "address",
+      },
+    ],
+    name: "excluded",
+    outputs: [
+      {
+        name: "",
+        type: "bool",
+      },
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "user",
+        type: "address",
+      },
+    ],
+    name: "_userInfo",
+    outputs: [
+      {
+        name: "lastBalance",
+        type: "uint256",
+      },
+      {
+        name: "lastMultiplier",
+        type: "uint256",
+      },
+      {
+        name: "resettingCount",
+        type: "uint256",
+      },
+    ],
+    payable: false,
+    stateMutability: "view",
     type: "function",
   },
   {

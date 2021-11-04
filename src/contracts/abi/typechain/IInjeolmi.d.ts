@@ -27,6 +27,8 @@ interface IInjeolmiInterface extends ethers.utils.Interface {
     "totalSupply()": FunctionFragment;
     "transferFrom(address,address,uint256)": FunctionFragment;
     "decimals()": FunctionFragment;
+    "excluded(address)": FunctionFragment;
+    "_userInfo(address)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "symbol()": FunctionFragment;
     "transfer(address,uint256)": FunctionFragment;
@@ -47,6 +49,8 @@ interface IInjeolmiInterface extends ethers.utils.Interface {
     values: [string, string, BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
+  encodeFunctionData(functionFragment: "excluded", values: [string]): string;
+  encodeFunctionData(functionFragment: "_userInfo", values: [string]): string;
   encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
   encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
   encodeFunctionData(
@@ -69,6 +73,8 @@ interface IInjeolmiInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "excluded", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "_userInfo", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "transfer", data: BytesLike): Result;
@@ -134,6 +140,35 @@ export class IInjeolmi extends Contract {
     decimals(overrides?: CallOverrides): Promise<[number]>;
 
     "decimals()"(overrides?: CallOverrides): Promise<[number]>;
+
+    excluded(user: string, overrides?: CallOverrides): Promise<[boolean]>;
+
+    "excluded(address)"(
+      user: string,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    _userInfo(
+      user: string,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber] & {
+        lastBalance: BigNumber;
+        lastMultiplier: BigNumber;
+        resettingCount: BigNumber;
+      }
+    >;
+
+    "_userInfo(address)"(
+      user: string,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber] & {
+        lastBalance: BigNumber;
+        lastMultiplier: BigNumber;
+        resettingCount: BigNumber;
+      }
+    >;
 
     balanceOf(
       owner: string,
@@ -212,6 +247,35 @@ export class IInjeolmi extends Contract {
 
   "decimals()"(overrides?: CallOverrides): Promise<number>;
 
+  excluded(user: string, overrides?: CallOverrides): Promise<boolean>;
+
+  "excluded(address)"(
+    user: string,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  _userInfo(
+    user: string,
+    overrides?: CallOverrides
+  ): Promise<
+    [BigNumber, BigNumber, BigNumber] & {
+      lastBalance: BigNumber;
+      lastMultiplier: BigNumber;
+      resettingCount: BigNumber;
+    }
+  >;
+
+  "_userInfo(address)"(
+    user: string,
+    overrides?: CallOverrides
+  ): Promise<
+    [BigNumber, BigNumber, BigNumber] & {
+      lastBalance: BigNumber;
+      lastMultiplier: BigNumber;
+      resettingCount: BigNumber;
+    }
+  >;
+
   balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
 
   "balanceOf(address)"(
@@ -285,6 +349,35 @@ export class IInjeolmi extends Contract {
     decimals(overrides?: CallOverrides): Promise<number>;
 
     "decimals()"(overrides?: CallOverrides): Promise<number>;
+
+    excluded(user: string, overrides?: CallOverrides): Promise<boolean>;
+
+    "excluded(address)"(
+      user: string,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    _userInfo(
+      user: string,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber] & {
+        lastBalance: BigNumber;
+        lastMultiplier: BigNumber;
+        resettingCount: BigNumber;
+      }
+    >;
+
+    "_userInfo(address)"(
+      user: string,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber] & {
+        lastBalance: BigNumber;
+        lastMultiplier: BigNumber;
+        resettingCount: BigNumber;
+      }
+    >;
 
     balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -371,6 +464,20 @@ export class IInjeolmi extends Contract {
 
     "decimals()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    excluded(user: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    "excluded(address)"(
+      user: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    _userInfo(user: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_userInfo(address)"(
+      user: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     "balanceOf(address)"(
@@ -445,6 +552,26 @@ export class IInjeolmi extends Contract {
     decimals(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "decimals()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    excluded(
+      user: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "excluded(address)"(
+      user: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    _userInfo(
+      user: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "_userInfo(address)"(
+      user: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     balanceOf(
       owner: string,

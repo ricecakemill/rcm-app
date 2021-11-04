@@ -25,11 +25,16 @@ interface InjeolmiPoolInterface extends ethers.utils.Interface {
   functions: {
     "ijm()": FunctionFragment;
     "swapToIJM()": FunctionFragment;
+    "addLiquidity()": FunctionFragment;
     "swapToKlay(uint256)": FunctionFragment;
   };
 
   encodeFunctionData(functionFragment: "ijm", values?: undefined): string;
   encodeFunctionData(functionFragment: "swapToIJM", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "addLiquidity",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "swapToKlay",
     values: [BigNumberish]
@@ -37,6 +42,10 @@ interface InjeolmiPoolInterface extends ethers.utils.Interface {
 
   decodeFunctionResult(functionFragment: "ijm", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "swapToIJM", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "addLiquidity",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "swapToKlay", data: BytesLike): Result;
 
   events: {
@@ -70,6 +79,12 @@ export class InjeolmiPool extends Contract {
 
     "swapToIJM()"(overrides?: PayableOverrides): Promise<ContractTransaction>;
 
+    addLiquidity(overrides?: PayableOverrides): Promise<ContractTransaction>;
+
+    "addLiquidity()"(
+      overrides?: PayableOverrides
+    ): Promise<ContractTransaction>;
+
     swapToKlay(
       amount: BigNumberish,
       overrides?: Overrides
@@ -89,6 +104,10 @@ export class InjeolmiPool extends Contract {
 
   "swapToIJM()"(overrides?: PayableOverrides): Promise<ContractTransaction>;
 
+  addLiquidity(overrides?: PayableOverrides): Promise<ContractTransaction>;
+
+  "addLiquidity()"(overrides?: PayableOverrides): Promise<ContractTransaction>;
+
   swapToKlay(
     amount: BigNumberish,
     overrides?: Overrides
@@ -107,6 +126,10 @@ export class InjeolmiPool extends Contract {
     swapToIJM(overrides?: CallOverrides): Promise<void>;
 
     "swapToIJM()"(overrides?: CallOverrides): Promise<void>;
+
+    addLiquidity(overrides?: CallOverrides): Promise<void>;
+
+    "addLiquidity()"(overrides?: CallOverrides): Promise<void>;
 
     swapToKlay(amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
@@ -131,6 +154,10 @@ export class InjeolmiPool extends Contract {
 
     "swapToIJM()"(overrides?: PayableOverrides): Promise<BigNumber>;
 
+    addLiquidity(overrides?: PayableOverrides): Promise<BigNumber>;
+
+    "addLiquidity()"(overrides?: PayableOverrides): Promise<BigNumber>;
+
     swapToKlay(amount: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
 
     "swapToKlay(uint256)"(
@@ -147,6 +174,12 @@ export class InjeolmiPool extends Contract {
     swapToIJM(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
 
     "swapToIJM()"(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
+
+    addLiquidity(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
+
+    "addLiquidity()"(
+      overrides?: PayableOverrides
+    ): Promise<PopulatedTransaction>;
 
     swapToKlay(
       amount: BigNumberish,
