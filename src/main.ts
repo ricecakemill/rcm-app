@@ -7,8 +7,8 @@ import Wallet from "./klaytn/Wallet";
 
 (async () => {
 
-    let priceDisplay;
-    let airdropDisplay;
+    let priceDisplay: DomNode;
+    let airdropDisplay: DomNode;
     let ijmPrice: BigNumber;
 
     let buyInput: DomNode<HTMLInputElement>;
@@ -84,16 +84,19 @@ import Wallet from "./klaytn/Wallet";
         ),
     );
 
+    const refresh = async () => {
+        const ijmBalance = await InjeolmiContract.balanceOf(InjeolmiPoolContract.address);
+        const klayBalance = await Wallet.balanceOf(InjeolmiPoolContract.address);
+        if (klayBalance !== undefined) {
+            ijmPrice = klayBalance.mul(utils.parseUnits("1", 8)).div(ijmBalance);
+            priceDisplay.empty().appendText(utils.formatEther(ijmPrice));
+        }
+        const airdropBalance = await InjeolmiContract.balanceOf(AirdropContract.address);
+        airdropDisplay.empty().appendText(utils.formatUnits(airdropBalance, 8));
+    };
+    setInterval(() => refresh(), 1000);
+
     if (await Wallet.connected() !== true) {
         await Wallet.connect();
     }
-
-    const ijmBalance = await InjeolmiContract.balanceOf(InjeolmiPoolContract.address);
-    const klayBalance = await Wallet.balanceOf(InjeolmiPoolContract.address);
-    if (klayBalance !== undefined) {
-        ijmPrice = klayBalance.mul(utils.parseUnits("1", 8)).div(ijmBalance);
-        priceDisplay.empty().appendText(utils.formatEther(ijmPrice));
-    }
-
-    airdropDisplay.empty().appendText(utils.formatUnits(await InjeolmiContract.balanceOf(AirdropContract.address), 8));
 })();
