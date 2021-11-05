@@ -18,6 +18,9 @@ import Wallet from "./klaytn/Wallet";
   let sellInput: DomNode<HTMLInputElement>;
   let sellResult: DomNode;
 
+  let carousel: DomNode<HTMLImageElement>;
+  let index = 0;
+
   BodyNode.append(
     el("h1", "떡방앗간.닷컴"),
     el(
@@ -72,9 +75,22 @@ import Wallet from "./klaytn/Wallet";
     el(
       ".card",
       el("h5", "인절미 가격"),
-      el("h6.price", (priceDisplay = el("span", "...")), " KLAY\n"),
+      el(
+        "h6",
+        "(대충 ",
+        (priceDisplay = el("a.price", "...", {
+          href: "https://dexata.kr/?tokenA=0x9cfc059f64d664f92f3d0329844b8ccca4e5215b&tokenB=0x0000000000000000000000000000000000000000",
+          target: "_blank",
+        })),
+        " KLAY 라는 내용)\n"
+      ),
       el("h5", "에어드롭 물량"),
-      el("h6.price", (airdropDisplay = el("span", "...")), " IJM\n")
+      el(
+        "h6",
+        "(대충 ",
+        (airdropDisplay = el("span.price", "...")),
+        " IJM 라는 내용)\n"
+      )
     ),
 
     el("h3", "클레이로 인절미 사기"),
@@ -107,7 +123,7 @@ import Wallet from "./klaytn/Wallet";
       })
     ),
 
-    el("h3", "인절미 클레이로 팔기"),
+    el("h3", "인절미 클레이로 펄기"),
     el("p", "인절미를 펄때도 떡크노믹스 때문에 10%를 적게 받습니다."),
     el(
       ".form",
@@ -128,7 +144,7 @@ import Wallet from "./klaytn/Wallet";
         }
       )),
       (sellResult = el(".result")),
-      el("button", "팔기", {
+      el("button", "펄기", {
         click: async () => {
           await InjeolmiPoolContract.swapToKlay(
             utils.parseUnits(sellInput.domElement.value, 8)
@@ -142,7 +158,64 @@ import Wallet from "./klaytn/Wallet";
       "p",
       "떡 NFT(KIP-37) 발행 예정입니다. 순수 2차 창작물로 발행되며 창작자에게 발행된 NFT를 전량 전달합니다. 떡 NFT는 Klubs가 출시되면 Klubs에 배포됩니다."
     ),
-    el("img", { src: "/images/nft/nft.jpg" }),
+    el(
+      ".carousel-container",
+      (carousel = el(
+        ".carousel",
+        el("img.art", { src: "/images/nft/nft.jpg" }),
+        el("img.art", { src: "/images/nft/01.jpg" }),
+        el("img.art", { src: "/images/nft/02.jpg" }),
+        el("img.art", { src: "/images/nft/03.jpg" }),
+        el("img.art", { src: "/images/nft/04.jpg" }),
+        el("img.art", { src: "/images/nft/05.jpg" }),
+        el("img.art", { src: "/images/nft/06.jpg" }),
+        el("img.art", { src: "/images/nft/07.jpg" }),
+        el("img.art", { src: "/images/nft/09.jpg" }),
+        el("img.art", { src: "/images/nft/10.jpg" }),
+        el("img.art", { src: "/images/nft/11.jpg" }),
+        el("img.art", { src: "/images/nft/12.jpg" }),
+        el("img.art", { src: "/images/nft/13.jpg" }),
+        el("img.art", { src: "/images/nft/14.jpg" }),
+        el("img.art", { src: "/images/nft/15.jpg" }),
+        el("img.art", { src: "/images/nft/16.jpg" }),
+        el("img.art", { src: "/images/nft/17.jpg" }),
+        el("img.art", { src: "/images/nft/18.jpg" }),
+        el("img.art", { src: "/images/nft/19.jpg" }),
+        el("img.art", { src: "/images/nft/20.jpg" }),
+        el("img.art", { src: "/images/nft/21.jpg" }),
+        el("img.art", { src: "/images/nft/22.jpg" }),
+        el("img.art", { src: "/images/nft/23.jpg" }),
+        el("img.art", { src: "/images/nft/24.jpg" }),
+        el("img.art", { src: "/images/nft/25.jpg" }),
+        el("img.art", { src: "/images/nft/26.jpg" }),
+        el("img.art", { src: "/images/nft/27.jpg" }),
+        el("img.art", { src: "/images/nft/29.jpg" }),
+        el("img.art", { src: "/images/nft/29.jpg" }),
+        el("img.art", { src: "/images/nft/30.jpg" }),
+        el("img.art", { src: "/images/nft/31.jpg" }),
+        el("img.art", { src: "/images/nft/32.jpg" }),
+        el("img.art", { src: "/images/nft/33.jpg" }),
+        el("img.art", { src: "/images/nft/34.jpg" })
+      ))
+    ),
+    el("button.prev", "< 이전", {
+      click: () => {
+        if (index === 0) return;
+        index -= 1;
+        carousel.style({
+          transform: `translate3d(-${560 * index}px, 0, 0)`,
+        });
+      },
+    }),
+    el("button.next", "다음 >", {
+      click: () => {
+        if (index === 25) return;
+        index += 1;
+        carousel.style({
+          transform: `translate3d(-${560 * index}px, 0, 0)`,
+        });
+      },
+    }),
     el(
       "footer",
       el("a", "트위터", {
