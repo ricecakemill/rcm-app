@@ -108,7 +108,7 @@ import Wallet from "./klaytn/Wallet";
     ),
 
     el("h3", "인절미 클레이로 팔기"),
-    el("p", "인절미를 팔때도 떡크노믹스 때문에 10%를 적게 받습니다."),
+    el("p", "인절미를 펄때도 떡크노믹스 때문에 10%를 적게 받습니다."),
     el(
       ".form",
       (sellInput = el(
