@@ -171,6 +171,12 @@ input {
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'ChosunGs';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/ChosunGs.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 body {
   font-family: ChosunGs;
   max-width: 600px;
@@ -184,39 +190,151 @@ a {
   text-decoration: underline;
 }
 h1 {
-  font-size: 50px;
+  font-size: 6rem;
   text-align: center;
   font-weight: bold;
-  color: #facb85;
-  -webkit-text-stroke: 0.2px #666;
+  color: #fdda97;
+  -webkit-text-stroke: 0.2px #1f1f1f;
 }
 h2 {
-  margin-top: 20px;
-  font-size: 30px;
+  margin-top: 48px;
+  font-size: 4.125rem;
   text-align: center;
   font-weight: bold;
-  color: #facb85;
-  -webkit-text-stroke: 0.2px #666;
+  color: #fdda97;
+  -webkit-text-stroke: 0.2px #1f1f1f;
 }
 h3 {
-  margin-top: 20px;
-  font-size: 20px;
+  margin-top: 48px;
+  font-size: 3rem;
   text-align: center;
   font-weight: bold;
-  color: #666;
+  color: #be9f64;
+  -webkit-text-stroke: 0.2px #1f1f1f;
+}
+h4 {
+  margin-top: 16px;
+  font-size: 2.125rem;
+  padding: 0px;
+  text-align: center;
+  font-weight: bold;
+}
+h5 {
+  margin: 24px;
+  font-size: 1.5rem;
+  padding: 0px;
+  text-align: center;
+  font-weight: bold;
+}
+h6 {
+  margin-bottom: 20px;
+  font-size: 1.25rem;
+  padding: 0px;
+  text-align: center;
+  font-weight: bold;
+}
+h6:hover {
+  animation-duration: 3s;
+  animation-name: rainbowLink;
+  animation-iteration-count: infinite;
 }
 img {
   display: block;
   margin: auto;
   max-width: 100%;
 }
+.logo:hover {
+  animation: rotate_image 3s linear infinite;
+  transform-origin: 50% 50%;
+}
+@keyframes rotate_image {
+  100% {
+    transform: rotate(360deg);
+  }
+}
 p {
   padding: 20px 0;
+  font-size: 1rem;
   text-align: center;
   line-height: 1.5em;
 }
 .links {
   line-height: 1.5em;
+}
+.links .danger {
+  font-size: 0.875rem;
+  color: #ff3b30;
+}
+a:hover,
+a:focus {
+  animation-duration: 3s;
+  animation-name: rainbowLink;
+  animation-iteration-count: infinite;
+}
+@keyframes rainbowLink {
+  0% {
+    color: red;
+  }
+  15% {
+    color: orange;
+  }
+  30% {
+    color: yellow;
+  }
+  45% {
+    color: green;
+  }
+  60% {
+    color: blue;
+  }
+  75% {
+    color: navy;
+  }
+  90% {
+    color: purple;
+  }
+  100% {
+    color: pink;
+  }
+}
+.card {
+  margin: 16px;
+  padding: 8px;
+  background-color: rgba(253, 218, 151, 0.5);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  color: black;
+}
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+.form > input {
+  padding: 4px;
+  width: 100%;
+  height: 48px;
+  font-size: 14px;
+  background-color: #fdda97;
+  border-radius: 8px;
+  border: 2px solid black;
+}
+.form > button {
+  font-size: 0.875rem;
+  width: 100%;
+  margin-top: 8px;
+  height: 32px;
+  border: 2px solid black;
+  background-color: #be9f64;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  padding: 4px;
+  border-radius: 8px;
+}
+.form button:hover {
+  animation-duration: 3s;
+  animation-name: rainbowLink;
+  animation-iteration-count: infinite;
 }
 footer {
   margin-top: 20px;
