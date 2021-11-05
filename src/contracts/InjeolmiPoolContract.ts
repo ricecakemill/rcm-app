@@ -1,6 +1,6 @@
 import { BigNumber } from "@ethersproject/bignumber";
 import Wallet from "../klaytn/Wallet";
-import InjeolmiPoolArtifact from "./abi/artifacts/contracts/InjeolmiPool.sol/InjeolmiPool.json";
+import InjeolmiPoolArtifact from "./abi/injeolmi/artifacts/contracts/InjeolmiPool.sol/InjeolmiPool.json";
 import InjeolmiContract from "./InjeolmiContract";
 import KIP7Contract from "./standard/KIP7Contract";
 

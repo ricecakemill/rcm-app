@@ -1,4 +1,4 @@
-import AirdropArtifact from "./abi/artifacts/contracts/Airdrop.sol/Airdrop.json";
+import AirdropArtifact from "./abi/injeolmi/artifacts/contracts/Airdrop.sol/Airdrop.json";
 import KIP7Contract from "./standard/KIP7Contract";
 
 class AirdropContract extends KIP7Contract {

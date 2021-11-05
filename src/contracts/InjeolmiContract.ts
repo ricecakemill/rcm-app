@@ -1,4 +1,4 @@
-import InjeolmiArtifact from "./abi/artifacts/contracts/Injeolmi.sol/Injeolmi.json";
+import InjeolmiArtifact from "./abi/injeolmi/artifacts/contracts/Injeolmi.sol/Injeolmi.json";
 import KIP7Contract from "./standard/KIP7Contract";
 
 class InjeolmiContract extends KIP7Contract {

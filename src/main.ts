@@ -3,6 +3,7 @@ import { BigNumber, utils } from "ethers";
 import AirdropContract from "./contracts/AirdropContract";
 import InjeolmiContract from "./contracts/InjeolmiContract";
 import InjeolmiPoolContract from "./contracts/InjeolmiPoolContract";
+import InjeolmiPriceContract from "./contracts/InjeolmiPriceContract";
 import Klaytn from "./klaytn/Klaytn";
 import Wallet from "./klaytn/Wallet";
 
@@ -90,12 +91,8 @@ import Wallet from "./klaytn/Wallet";
     );
 
     const refresh = async () => {
-        const ijmBalance = await InjeolmiContract.balanceOf(InjeolmiPoolContract.address);
-        const klayBalance = await Klaytn.balanceOf(InjeolmiPoolContract.address);
-        if (klayBalance !== undefined) {
-            ijmPrice = klayBalance.mul(utils.parseUnits("1", 8)).div(ijmBalance);
-            priceDisplay.empty().appendText(utils.formatEther(ijmPrice));
-        }
+        ijmPrice = await InjeolmiPriceContract.price();
+        priceDisplay.empty().appendText(utils.formatEther(ijmPrice));
         const airdropBalance = await InjeolmiContract.balanceOf(AirdropContract.address);
         airdropDisplay.empty().appendText(utils.formatUnits(airdropBalance, 8));
     };
