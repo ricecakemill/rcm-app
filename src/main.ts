@@ -77,20 +77,14 @@ import Wallet from "./klaytn/Wallet";
       el("h5", "인절미 가격"),
       el(
         "h6",
-        "(대충 ",
         (priceDisplay = el("a.price", "...", {
           href: "https://dexata.kr/?tokenA=0x9cfc059f64d664f92f3d0329844b8ccca4e5215b&tokenB=0x0000000000000000000000000000000000000000",
           target: "_blank",
         })),
-        " KLAY 라는 내용)\n"
+        " KLAY\n"
       ),
       el("h5", "에어드롭 물량"),
-      el(
-        "h6",
-        "(대충 ",
-        (airdropDisplay = el("span.price", "...")),
-        " IJM 라는 내용)\n"
-      )
+      el("h6", (airdropDisplay = el("span.price", "...")), " IJM\n")
     ),
 
     el("h3", "클레이로 인절미 사기"),
