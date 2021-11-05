@@ -70,6 +70,11 @@ import Wallet from "./klaytn/Wallet";
       el("a", "소스 코드", {
         href: "https://github.com/ricecakemill/injeolmi",
         target: "_blank",
+      }),
+      "\n",
+      el("a", "차트 보기", {
+        href: "https://dexata.kr/?tokenA=0x9cfc059f64d664f92f3d0329844b8ccca4e5215b&tokenB=0x0000000000000000000000000000000000000000",
+        target: "_blank",
       })
     ),
     el(
@@ -77,10 +82,7 @@ import Wallet from "./klaytn/Wallet";
       el("h5", "인절미 가격"),
       el(
         "h6",
-        (priceDisplay = el("a.price", "...", {
-          href: "https://dexata.kr/?tokenA=0x9cfc059f64d664f92f3d0329844b8ccca4e5215b&tokenB=0x0000000000000000000000000000000000000000",
-          target: "_blank",
-        })),
+        (priceDisplay = el("span.price", "...")),
         " KLAY\n"
       ),
       el("h5", "에어드롭 물량"),
