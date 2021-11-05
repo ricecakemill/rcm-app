@@ -3,6 +3,7 @@ import { BigNumber, utils } from "ethers";
 import AirdropContract from "./contracts/AirdropContract";
 import InjeolmiContract from "./contracts/InjeolmiContract";
 import InjeolmiPoolContract from "./contracts/InjeolmiPoolContract";
+import Klaytn from "./klaytn/Klaytn";
 import Wallet from "./klaytn/Wallet";
 
 (async () => {
@@ -19,7 +20,7 @@ import Wallet from "./klaytn/Wallet";
 
     BodyNode.append(
         el("h1", "떡방앗간.닷컴"),
-        el("p", "사이트가 아직도 개발중입니다. 일단 인절미부터 오픈~~"),
+        el("p", "한국인의 정과 훈훈한 인심. 따뜻한 코인 커뮤니티 떡방앗간 코인 이야기.\nhttp://ricecakemill.com 으로도 접속하실 수 있습니다."),
 
         el("h2", "인절미"),
         el("img", { src: "/images/injeolmi.png", height: "330" }),
@@ -90,7 +91,7 @@ import Wallet from "./klaytn/Wallet";
 
     const refresh = async () => {
         const ijmBalance = await InjeolmiContract.balanceOf(InjeolmiPoolContract.address);
-        const klayBalance = await Wallet.balanceOf(InjeolmiPoolContract.address);
+        const klayBalance = await Klaytn.balanceOf(InjeolmiPoolContract.address);
         if (klayBalance !== undefined) {
             ijmPrice = klayBalance.mul(utils.parseUnits("1", 8)).div(ijmBalance);
             priceDisplay.empty().appendText(utils.formatEther(ijmPrice));
