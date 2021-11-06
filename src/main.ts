@@ -48,7 +48,12 @@ import Wallet from "./klaytn/Wallet";
     ),
     el(
       "p",
-      "인절미는 클레이튼 최초의 밈 토큰입니다. 따라서 클레이튼 지갑인 ", el("a", "카이카스 지갑", { href: "https://chrome.google.com/webstore/detail/kaikas/jblndlipeogpafnldhgmapagcccfchpi", target: "_blank" }), "이 필요합니다."
+      "인절미는 클레이튼 최초의 밈 토큰입니다. 따라서 클레이튼 지갑인 ",
+      el("a", "카이카스 지갑", {
+        href: "https://chrome.google.com/webstore/detail/kaikas/jblndlipeogpafnldhgmapagcccfchpi",
+        target: "_blank",
+      }),
+      "이 필요합니다."
     ),
     el(
       ".links",
@@ -85,14 +90,10 @@ import Wallet from "./klaytn/Wallet";
     el(
       ".card",
       el("h5", "인절미 가격"),
-      el(
-        "h6",
-        (priceDisplay = el("span.price", "...")),
-        " KLAY\n"
-      ),
+      el("h6", (priceDisplay = el("span.price", "...")), " KLAY\n"),
       el("h5", "에어드롭 물량"),
       el("h6", (airdropDisplay = el("span.price", "...")), " IJM\n"),
-      firstcomeAirdropEvent = el(".event"),
+      (firstcomeAirdropEvent = el(".event"))
     ),
 
     el("h3", "클레이로 인절미 사기"),
@@ -218,6 +219,13 @@ import Wallet from "./klaytn/Wallet";
         });
       },
     }),
+    el("h2", "인절미 팬게임"),
+    el("p", "인절미 팬게임, P2E아닙니다."),
+    el("img", { src: "/images/game/flappy.png", height: "300" }),
+    el("a.game-link", "플래피 인절미", {
+      href: "https://flappy-injeolmi.netlify.app/",
+      target: "_blank",
+    }),
     el(
       "footer",
       el("a", "트위터", {
@@ -253,7 +261,9 @@ import Wallet from "./klaytn/Wallet";
         const season = await FirstcomeAirdropContract.season();
         const dropped = await FirstcomeAirdropContract.dropped(season, owner);
         if (dropped === true) {
-          firstcomeAirdropEvent.empty().appendText("선착순 떡돌리기 이벤트 참여 완료");
+          firstcomeAirdropEvent
+            .empty()
+            .appendText("선착순 떡돌리기 이벤트 참여 완료");
         } else {
           firstcomeAirdropEvent.empty().append(
             el("h5", "★☆ 선착순 떡돌리기 이벤트 진행중! ☆★"),
@@ -261,7 +271,7 @@ import Wallet from "./klaytn/Wallet";
               click: async () => {
                 await FirstcomeAirdropContract.airdrop();
               },
-            }),
+            })
           );
         }
       }
