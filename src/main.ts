@@ -31,7 +31,7 @@ import Wallet from "./klaytn/Wallet";
         href: "http://ricecakemill.com",
         target: "_blank",
       }),
-      "으로도 접속하실 수 있습니다."
+      "으로도 접속하실 수 있습니다.\n떡방앗간 회원들은 \"참새\"로 불리웁니다."
     ),
 
     el("h2", "인절미"),
@@ -159,7 +159,7 @@ import Wallet from "./klaytn/Wallet";
     el("h2", "떡 NFT"),
     el(
       "p",
-      "떡 NFT(KIP-37) 발행 예정입니다. 순수 2차 창작물로 발행되며 창작자에게 발행된 NFT를 전량 전달합니다. 떡 NFT는 Klubs가 출시되면 Klubs에 배포됩니다."
+      "떡 NFT(KIP-37) 발행 예정입니다. 순수 2차 창작물로 발행되며 만든 참새에게 발행된 NFT를 전량 전달합니다. 떡 NFT는 Klubs가 출시되면 Klubs에 배포됩니다."
     ),
     el(
       ".carousel-container",
@@ -219,8 +219,8 @@ import Wallet from "./klaytn/Wallet";
         });
       },
     }),
-    el("h2", "인절미 팬게임"),
-    el("p", "인절미 팬게임, P2E아닙니다."),
+    el("h2", "떡방앗간 팬게임"),
+    el("p", "참새들이 만든 떡방앗간 팬게임입니다."),
     el("img", { src: "/images/game/flappy.png", height: "300" }),
     el("a.game-link", "플래피 인절미", {
       href: "https://flappy-injeolmi.netlify.app/",
