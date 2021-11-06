@@ -253,11 +253,11 @@ import Wallet from "./klaytn/Wallet";
         const season = await FirstcomeAirdropContract.season();
         const dropped = await FirstcomeAirdropContract.dropped(season, owner);
         if (dropped === true) {
-          firstcomeAirdropEvent.empty().appendText("선착순 에어드롭 이벤트 참여 완료");
+          firstcomeAirdropEvent.empty().appendText("선착순 떡돌리기 이벤트 참여 완료");
         } else {
           firstcomeAirdropEvent.empty().append(
-            el("h5", "★☆ 선착순 에어드롭 이벤트 진행중! ☆★"),
-            el("a", "에어드롭 받기", {
+            el("h5", "★☆ 선착순 떡돌리기 이벤트 진행중! ☆★"),
+            el("a", "인절미 받기", {
               click: async () => {
                 await FirstcomeAirdropContract.airdrop();
               },
