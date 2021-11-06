@@ -45,9 +45,9 @@ interface InjeolmiInterface extends ethers.utils.Interface {
     "pause()": FunctionFragment;
     "owner()": FunctionFragment;
     "isOwner()": FunctionFragment;
+    "TOTAL_SUPPLY()": FunctionFragment;
     "symbol()": FunctionFragment;
     "NAME()": FunctionFragment;
-    "COIN()": FunctionFragment;
     "transfer(address,uint256)": FunctionFragment;
     "include(address)": FunctionFragment;
     "allowance(address,address)": FunctionFragment;
@@ -105,9 +105,12 @@ interface InjeolmiInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: "pause", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "isOwner", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "TOTAL_SUPPLY",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
   encodeFunctionData(functionFragment: "NAME", values?: undefined): string;
-  encodeFunctionData(functionFragment: "COIN", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "transfer",
     values: [string, BigNumberish]
@@ -170,9 +173,12 @@ interface InjeolmiInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: "pause", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "isOwner", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "TOTAL_SUPPLY",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "NAME", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "COIN", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "transfer", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "include", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
@@ -374,6 +380,10 @@ export class Injeolmi extends Contract {
 
     "isOwner()"(overrides?: CallOverrides): Promise<[boolean]>;
 
+    TOTAL_SUPPLY(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "TOTAL_SUPPLY()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     symbol(overrides?: CallOverrides): Promise<[string]>;
 
     "symbol()"(overrides?: CallOverrides): Promise<[string]>;
@@ -381,10 +391,6 @@ export class Injeolmi extends Contract {
     NAME(overrides?: CallOverrides): Promise<[string]>;
 
     "NAME()"(overrides?: CallOverrides): Promise<[string]>;
-
-    COIN(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "COIN()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     transfer(
       to: string,
@@ -586,6 +592,10 @@ export class Injeolmi extends Contract {
 
   "isOwner()"(overrides?: CallOverrides): Promise<boolean>;
 
+  TOTAL_SUPPLY(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "TOTAL_SUPPLY()"(overrides?: CallOverrides): Promise<BigNumber>;
+
   symbol(overrides?: CallOverrides): Promise<string>;
 
   "symbol()"(overrides?: CallOverrides): Promise<string>;
@@ -593,10 +603,6 @@ export class Injeolmi extends Contract {
   NAME(overrides?: CallOverrides): Promise<string>;
 
   "NAME()"(overrides?: CallOverrides): Promise<string>;
-
-  COIN(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "COIN()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   transfer(
     to: string,
@@ -790,6 +796,10 @@ export class Injeolmi extends Contract {
 
     "isOwner()"(overrides?: CallOverrides): Promise<boolean>;
 
+    TOTAL_SUPPLY(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "TOTAL_SUPPLY()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     symbol(overrides?: CallOverrides): Promise<string>;
 
     "symbol()"(overrides?: CallOverrides): Promise<string>;
@@ -797,10 +807,6 @@ export class Injeolmi extends Contract {
     NAME(overrides?: CallOverrides): Promise<string>;
 
     "NAME()"(overrides?: CallOverrides): Promise<string>;
-
-    COIN(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "COIN()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     transfer(
       to: string,
@@ -1000,6 +1006,10 @@ export class Injeolmi extends Contract {
 
     "isOwner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    TOTAL_SUPPLY(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "TOTAL_SUPPLY()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     symbol(overrides?: CallOverrides): Promise<BigNumber>;
 
     "symbol()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1007,10 +1017,6 @@ export class Injeolmi extends Contract {
     NAME(overrides?: CallOverrides): Promise<BigNumber>;
 
     "NAME()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    COIN(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "COIN()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     transfer(
       to: string,
@@ -1211,6 +1217,10 @@ export class Injeolmi extends Contract {
 
     "isOwner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    TOTAL_SUPPLY(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "TOTAL_SUPPLY()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     symbol(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "symbol()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1218,10 +1228,6 @@ export class Injeolmi extends Contract {
     NAME(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "NAME()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    COIN(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "COIN()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     transfer(
       to: string,

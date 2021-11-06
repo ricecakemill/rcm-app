@@ -1,6 +1,6 @@
 import { BigNumber } from "@ethersproject/bignumber";
-import KIP7Contract from "./standard/KIP7Contract";
-declare class InjeolmiPoolContract extends KIP7Contract {
+import Contract from "./Contract";
+declare class InjeolmiPoolContract extends Contract {
     constructor();
     swapToIJM(value: BigNumber): Promise<void>;
     swapToKlay(amount: BigNumber): Promise<void>;

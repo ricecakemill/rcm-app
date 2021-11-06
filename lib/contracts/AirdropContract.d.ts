@@ -1,5 +1,5 @@
-import KIP7Contract from "./standard/KIP7Contract";
-declare class AirdropContract extends KIP7Contract {
+import Contract from "./Contract";
+declare class AirdropContract extends Contract {
     constructor();
 }
 declare const _default: AirdropContract;

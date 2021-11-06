@@ -41,7 +41,9 @@ class Wallet extends EventContainer {
         if (ExtWallet.installed === true) {
             return await ExtWallet.connect();
         } else {
-            alert("카이카스가 필요합니다. 카이카스를 설치해주시기 바랍니다.");
+            if (confirm("카이카스가 필요합니다. 카이카스를 설치하시겠습니까?")) {
+                location.href = "https://chrome.google.com/webstore/detail/kaikas/jblndlipeogpafnldhgmapagcccfchpi";
+            }
         }
     }
 

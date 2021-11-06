@@ -1,4 +1,5 @@
 export type { Airdrop } from "./Airdrop";
+export type { FirstcomeAirdrop } from "./FirstcomeAirdrop";
 export type { Injeolmi } from "./Injeolmi";
 export type { InjeolmiPool } from "./InjeolmiPool";
 export type { IInjeolmi } from "./IInjeolmi";
@@ -71,6 +72,7 @@ export type { KIP7Pausable } from "./KIP7Pausable";
 export type { KIP7Token } from "./KIP7Token";
 export type { KIP7TokenFull } from "./KIP7TokenFull";
 export { Airdrop__factory } from "./factories/Airdrop__factory";
+export { FirstcomeAirdrop__factory } from "./factories/FirstcomeAirdrop__factory";
 export { Injeolmi__factory } from "./factories/Injeolmi__factory";
 export { InjeolmiPool__factory } from "./factories/InjeolmiPool__factory";
 export { IInjeolmi__factory } from "./factories/IInjeolmi__factory";

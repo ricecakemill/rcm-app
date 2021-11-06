@@ -1,6 +1,6 @@
 import { BigNumber } from "@ethersproject/bignumber";
-import KIP7Contract from "./standard/KIP7Contract";
-declare class InjeolmiPriceContract extends KIP7Contract {
+import Contract from "./Contract";
+declare class InjeolmiPriceContract extends Contract {
     constructor();
     price(): Promise<BigNumber>;
 }

@@ -1,10 +1,10 @@
 import { BigNumber } from "@ethersproject/bignumber";
 import Wallet from "../klaytn/Wallet";
 import InjeolmiPoolArtifact from "./abi/injeolmi/artifacts/contracts/InjeolmiPool.sol/InjeolmiPool.json";
+import Contract from "./Contract";
 import InjeolmiContract from "./InjeolmiContract";
-import KIP7Contract from "./standard/KIP7Contract";
 
-class InjeolmiPoolContract extends KIP7Contract {
+class InjeolmiPoolContract extends Contract {
 
     constructor() {
         super("0xcefaBd4B6544422D74a4645CDd0a3624E36661AA", InjeolmiPoolArtifact.abi);

@@ -1,1 +1,1 @@
-{"version":3,"file":"AirdropContract.d.ts","sourceRoot":"","sources":["../../src/contracts/AirdropContract.ts"],"names":[],"mappings":"AACA,OAAO,YAAY,MAAM,yBAAyB,CAAC;AAEnD,cAAM,eAAgB,SAAQ,YAAY;;CAKzC;;AAED,wBAAqC"}
+{"version":3,"file":"AirdropContract.d.ts","sourceRoot":"","sources":["../../src/contracts/AirdropContract.ts"],"names":[],"mappings":"AACA,OAAO,QAAQ,MAAM,YAAY,CAAC;AAElC,cAAM,eAAgB,SAAQ,QAAQ;;CAKrC;;AAED,wBAAqC"}

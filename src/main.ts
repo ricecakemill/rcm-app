@@ -1,15 +1,16 @@
 import { BodyNode, DomNode, el } from "@hanul/skynode";
 import { BigNumber, utils } from "ethers";
 import AirdropContract from "./contracts/AirdropContract";
+import FirstcomeAirdropContract from "./contracts/FirstcomeAirdropContract";
 import InjeolmiContract from "./contracts/InjeolmiContract";
 import InjeolmiPoolContract from "./contracts/InjeolmiPoolContract";
 import InjeolmiPriceContract from "./contracts/InjeolmiPriceContract";
-import Klaytn from "./klaytn/Klaytn";
 import Wallet from "./klaytn/Wallet";
 
 (async () => {
   let priceDisplay: DomNode;
   let airdropDisplay: DomNode;
+  let firstcomeAirdropEvent: DomNode;
   let ijmPrice: BigNumber;
 
   let buyInput: DomNode<HTMLInputElement>;
@@ -44,6 +45,10 @@ import Wallet from "./klaytn/Wallet";
     el(
       "p",
       "토큰 전송 시 10% 떼감 -> 9%는 홀더들한테 떡돌림, 1%는 떡방앗간에 팁으로 제공 (팁은 이벤트, 에드, 기부, 개발자 사리사욕에 쓰임)"
+    ),
+    el(
+      "p",
+      "인절미는 클레이튼 최초의 밈 토큰입니다. 따라서 클레이튼 지갑인 ", el("a", "카이카스 지갑", { href: "https://chrome.google.com/webstore/detail/kaikas/jblndlipeogpafnldhgmapagcccfchpi", target: "_blank" }), "이 필요합니다."
     ),
     el(
       ".links",
@@ -86,7 +91,8 @@ import Wallet from "./klaytn/Wallet";
         " KLAY\n"
       ),
       el("h5", "에어드롭 물량"),
-      el("h6", (airdropDisplay = el("span.price", "...")), " IJM\n")
+      el("h6", (airdropDisplay = el("span.price", "...")), " IJM\n"),
+      firstcomeAirdropEvent = el(".event"),
     ),
 
     el("h3", "클레이로 인절미 사기"),
@@ -235,8 +241,33 @@ import Wallet from "./klaytn/Wallet";
       AirdropContract.address
     );
     airdropDisplay.empty().appendText(utils.formatUnits(airdropBalance, 8));
+
+    // 이벤트 진행중?
+    const owner = await Wallet.loadAddress();
+    if (owner !== undefined) {
+      const firstcomeAirdropBalance = await InjeolmiContract.balanceOf(
+        FirstcomeAirdropContract.address
+      );
+      const airdropAmount = await FirstcomeAirdropContract.airdropAmount();
+      if (firstcomeAirdropBalance.gte(airdropAmount)) {
+        const season = await FirstcomeAirdropContract.season();
+        const dropped = await FirstcomeAirdropContract.dropped(season, owner);
+        if (dropped === true) {
+          firstcomeAirdropEvent.empty().appendText("선착순 에어드롭 이벤트 참여 완료");
+        } else {
+          firstcomeAirdropEvent.empty().append(
+            el("h5", "★☆ 선착순 에어드롭 이벤트 진행중! ☆★"),
+            el("a", "에어드롭 받기", {
+              click: async () => {
+                await FirstcomeAirdropContract.airdrop();
+              },
+            }),
+          );
+        }
+      }
+    }
   };
-  setInterval(() => refresh(), 1000);
+  setInterval(() => refresh(), 2000);
 
   if ((await Wallet.connected()) !== true) {
     await Wallet.connect();
