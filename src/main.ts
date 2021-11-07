@@ -161,7 +161,7 @@ import Wallet from "./klaytn/Wallet";
       "p",
       "곳간은 떡방앗간 코인 이야기의 자산들이 보관된 곳입니다.\n어디에도 주거나 팔지 않고 영원히 간직됩니다."
     ),
-    el("a", "곳간 주소\nhttps://opensea.io/0x20bF4fc7376D9Ec2E9Fd0aB182DD2Ac066Ce3AF7", { href: "https://opensea.io/0x20bF4fc7376D9Ec2E9Fd0aB182DD2Ac066Ce3AF7", target: "_blank" }),
+    el("a", "곳간 주소\nhttps://opensea.io/ricecakemill", { href: "https://opensea.io/ricecakemill", target: "_blank" }),
 
     el("h2", "떡 NFT"),
     el(
