@@ -378,6 +378,9 @@ button:hover {
   padding: 4px;
   border-radius: 8px;
 }
+.warning {
+  color: red;
+}
 .result {
   font-size: 0.875rem;
   margin-top: 8px;

@@ -88,6 +88,10 @@ import Wallet from "./klaytn/Wallet";
       })
     ),
     el(
+      "p.warning",
+      "절대 본인의 인절미를 본인의 지갑에 전송하지 마세요. 인절미를 모두 잃어버릴 수 있습니다!"
+    ),
+    el(
       ".card",
       el("h5", "인절미 가격"),
       el("h6", (priceDisplay = el("span.price", "...")), " KLAY\n"),
@@ -105,14 +109,16 @@ import Wallet from "./klaytn/Wallet";
         { placeholder: "KLAY 수량" },
         {
           keyup: () => {
-            const value = utils.parseEther(buyInput.domElement.value);
-            buyResult
-              .empty()
-              .appendText(
-                `대략 ${utils.formatEther(
-                  value.mul(utils.parseEther("1")).div(ijmPrice).mul(9).div(10)
-                )} IJM`
-              );
+            setTimeout(() => {
+              const value = utils.parseEther(buyInput.domElement.value);
+              buyResult
+                .empty()
+                .appendText(
+                  `대략 ${utils.formatEther(
+                    value.mul(utils.parseEther("1")).div(ijmPrice).mul(9).div(10)
+                  )} IJM`
+                );
+            });
           },
         }
       )),
@@ -126,7 +132,7 @@ import Wallet from "./klaytn/Wallet";
       })
     ),
 
-    el("h3", "인절미 클레이로 펄기"),
+    el("h3", "인절미 클레이로 팔기"),
     el("p", "인절미를 펄때도 떡크노믹스 때문에 10%를 적게 받습니다."),
     el(
       ".form",
@@ -135,19 +141,21 @@ import Wallet from "./klaytn/Wallet";
         { placeholder: "IJM 수량" },
         {
           keyup: () => {
-            const value = utils.parseEther(sellInput.domElement.value);
-            sellResult
-              .empty()
-              .appendText(
-                `대략 ${utils.formatEther(
-                  value.mul(ijmPrice).div(utils.parseEther("1")).mul(9).div(10)
-                )} KLAY`
-              );
+            setTimeout(() => {
+              const value = utils.parseEther(sellInput.domElement.value);
+              sellResult
+                .empty()
+                .appendText(
+                  `대략 ${utils.formatEther(
+                    value.mul(ijmPrice).div(utils.parseEther("1")).mul(9).div(10)
+                  )} KLAY`
+                );
+            });
           },
         }
       )),
       (sellResult = el(".result")),
-      el("button", "펄기", {
+      el("button", "팔기", {
         click: async () => {
           await InjeolmiPoolContract.swapToKlay(
             utils.parseUnits(sellInput.domElement.value, 8)
