@@ -63,7 +63,7 @@ export default class MintSparrowNFT implements View {
                             setTimeout(async () => {
                                 if (this.dataURL !== undefined && id >= 0) {
                                     const signedMessage = await Wallet.signMessage("Upload SparrowNFT File");
-                                    await fetch("https://api.ricecakemill.com/sparrow/nft/1/upload", {
+                                    await fetch(`https://api.ricecakemill.com/sparrow/nft/${id}/upload`, {
                                         method: "POST",
                                         body: JSON.stringify({
                                             dataURL: this.dataURL,
