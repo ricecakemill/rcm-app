@@ -77,6 +77,7 @@ export default class MintSparrowNFT implements View {
                     },
                 }),
             ),
+            el("p", "* 무료 패러디물은 관계없으나, 판매를 목적으로 하는 경우는 저작권에 주의하세요."),
             el("p", "* 이미 발행된 NFT도 수정할 수 있도록 추후 기능 제공 예정"),
         ).appendTo(BodyNode);
     }
