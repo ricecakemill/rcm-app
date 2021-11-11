@@ -19,6 +19,9 @@ export default class MintSparrowNFT implements View {
         this.container = el(".mint-sparrow-nft-view",
             el("a", "< 뒤로가기", { click: () => ViewUtil.go("/") }),
             el("h2", "참새 NFT 만들기"),
+            el("img", {
+                src: "images/sparrowNFT.png"
+            }),
             el(".form",
                 this.extnameInput = el("input", { placeholder: "파일 확장자 (png 등, 점 빼고)" }),
                 this.nameInput = el("input", { placeholder: "NFT 이름" }),
@@ -37,7 +40,7 @@ export default class MintSparrowNFT implements View {
                         }
                     },
                 }),
-                el("a", "만들기", {
+                el("button", "만들기", {
                     click: async () => {
 
                         const owner = await Wallet.loadAddress();
@@ -77,7 +80,8 @@ export default class MintSparrowNFT implements View {
                     },
                 }),
             ),
-            el("p", "* 무료 패러디물은 관계없으나, 판매를 목적으로 하는 경우는 저작권에 주의하세요."),
+            el("p.danger", "* 무료 패러디물은 관계없으나, 판매를 목적으로 하는 경우는 저작권에 주의하세요."),
+            el("h5", "준비 중"),
             el("p", "* 이미 발행된 NFT도 수정할 수 있도록 추후 기능 제공 예정"),
         ).appendTo(BodyNode);
     }

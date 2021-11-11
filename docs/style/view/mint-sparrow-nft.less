@@ -1,0 +1,42 @@
+@import "../font.less";
+@import "../palette.less";
+
+
+.mint-sparrow-nft-view {
+    .form {
+        margin-top: 8px;
+
+        input {
+            margin-top: 8px;
+            padding   : 4px;
+        }
+    }
+
+    .danger {
+        color: @danger;
+    }
+
+    h5 {
+        margin    : 0px;
+        margin-top: 8px;
+    }
+
+    img {
+        height            : 200px;
+        -webkit-filter    : grayscale(100%);
+        filter            : grayscale(100%);
+        -webkit-transition: .3s ease-in-out;
+        transition        : .3s ease-in-out;
+    }
+
+    img:hover {
+        -webkit-filter: grayscale(0);
+        filter        : grayscale(0);
+    }
+
+    @keyframes rotate_image {
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}
