@@ -395,4 +395,34 @@ footer {
   line-height: 1.5em;
   text-align: center;
 }
+.mint-sparrow-nft-view .form {
+  margin-top: 8px;
+}
+.mint-sparrow-nft-view .form input {
+  margin-top: 8px;
+  padding: 4px;
+}
+.mint-sparrow-nft-view .danger {
+  color: #ff3b30;
+}
+.mint-sparrow-nft-view h5 {
+  margin: 0px;
+  margin-top: 8px;
+}
+.mint-sparrow-nft-view img {
+  height: 200px;
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+.mint-sparrow-nft-view img:hover {
+  -webkit-filter: grayscale(0);
+  filter: grayscale(0);
+}
+@keyframes rotate_image {
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
