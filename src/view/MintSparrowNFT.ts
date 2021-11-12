@@ -77,6 +77,7 @@ export default class MintSparrowNFT implements View {
                                                 signedMessage,
                                             }),
                                         });
+                                        alert("등록 완료!~!");
                                         SkyRouter.refresh();
                                     }
                                 }, 2000);
