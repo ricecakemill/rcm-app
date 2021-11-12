@@ -1,4 +1,5 @@
 import { BodyNode, DomNode, el } from "@hanul/skynode";
+import msg from "msg.js";
 import { SkyRouter, View, ViewParams } from "skyrouter";
 import CommonUtil from "../CommonUtil";
 import SparrowNFTsContract from "../contracts/SparrowNFTsContract";
@@ -22,9 +23,9 @@ export default class MintSparrowNFT implements View {
             el("header",
                 el("a", "< 뒤로가기", { click: () => ViewUtil.go("/") }),
                 el("h2", "참새 NFT 만들기"),
-                el("img", {
-                    src: "images/sparrowNFT.png"
-                }),
+                el("p", msg("SPARROW_NFT_DESC")),
+                el("img.art", { src: "images/sparrowNFT.png" }),
+                el("p", el("a", msg("SPARROW_NFT_ADDRESS"), "\nhttps://opensea.io/collection/sparrow-nfts", { href: "https://opensea.io/collection/sparrow-nfts", target: "_blank" })),
                 el(".form",
                     this.extnameInput = el("input", { placeholder: "파일 확장자 (png 등, 점 빼고)" }),
                     this.nameInput = el("input", { placeholder: "NFT 이름" }),
