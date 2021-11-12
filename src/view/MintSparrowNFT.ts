@@ -77,7 +77,6 @@ export default class MintSparrowNFT implements View {
                                                 signedMessage,
                                             }),
                                         });
-                                        open(`https://opensea.io/assets/klaytn/0xfe1970e7fba02c2ab7721840eca0277d5ee6b482/${id}`);
                                         SkyRouter.refresh();
                                     }
                                 }, 2000);
