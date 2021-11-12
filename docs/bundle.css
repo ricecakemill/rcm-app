@@ -461,6 +461,7 @@ footer {
   margin-bottom: 10px;
   object-fit: contain;
   object-position: 50% 50%;
+  cursor: pointer;
 }
 .mint-sparrow-nft-view > .nft-list > .nft > .content > .description {
   margin-top: 10px;

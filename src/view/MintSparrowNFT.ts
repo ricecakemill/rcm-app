@@ -112,7 +112,10 @@ export default class MintSparrowNFT implements View {
                 el(".nft",
                     el(".content",
                         el(".title", title),
-                        el("img", { src: `https://storage.googleapis.com/sparrow-nfts/${id}.${extname}` }),
+                        el("img", {
+                            src: `https://storage.googleapis.com/sparrow-nfts/${id}.${extname}`,
+                            click: () => open(`https://opensea.io/assets/klaytn/0xfe1970e7fba02c2ab7721840eca0277d5ee6b482/${id}`),
+                        }),
                         el(".minter", `발행자: ${CommonUtil.shortenAddress(minter)}`),
                         el(".totalSupply", `총 발행량: ${totalSupply.toNumber()}`),
                         el(".description", description),
