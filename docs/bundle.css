@@ -179,8 +179,6 @@ input {
 }
 body {
   font-family: ChosunGs;
-  max-width: 600px;
-  margin: auto;
   padding: 20px;
   text-align: center;
   background: url("/images/background.jpg");
@@ -395,28 +393,36 @@ footer {
   line-height: 1.5em;
   text-align: center;
 }
-.mint-sparrow-nft-view .form {
+.home-view {
+  max-width: 600px;
+  margin: auto;
+}
+.mint-sparrow-nft-view > header {
+  max-width: 600px;
+  margin: auto;
+}
+.mint-sparrow-nft-view > header .form {
   margin-top: 8px;
 }
-.mint-sparrow-nft-view .form input {
+.mint-sparrow-nft-view > header .form input {
   margin-top: 8px;
   padding: 4px;
 }
-.mint-sparrow-nft-view .danger {
+.mint-sparrow-nft-view > header .danger {
   color: #ff3b30;
 }
-.mint-sparrow-nft-view h5 {
+.mint-sparrow-nft-view > header h5 {
   margin: 0px;
   margin-top: 8px;
 }
-.mint-sparrow-nft-view img {
+.mint-sparrow-nft-view > header img {
   height: 200px;
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
   -webkit-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
 }
-.mint-sparrow-nft-view img:hover {
+.mint-sparrow-nft-view > header img:hover {
   -webkit-filter: grayscale(0);
   filter: grayscale(0);
 }
@@ -424,5 +430,47 @@ footer {
   100% {
     transform: rotate(360deg);
   }
+}
+.mint-sparrow-nft-view > .nft-list {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+}
+@media only screen and (max-width: 719px) {
+  .mint-sparrow-nft-view > .nft-list {
+    grid-template-columns: 50% 50%;
+  }
+}
+.mint-sparrow-nft-view > .nft-list > .nft {
+  padding: 5px;
+  line-height: 1.2em;
+}
+.mint-sparrow-nft-view > .nft-list > .nft > .content {
+  background: #fff;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  word-break: break-all;
+}
+.mint-sparrow-nft-view > .nft-list > .nft > .content > .title {
+  font-size: 20px;
+}
+.mint-sparrow-nft-view > .nft-list > .nft > .content > img {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  object-fit: contain;
+  object-position: 50% 50%;
+}
+.mint-sparrow-nft-view > .nft-list > .nft > .content > .description {
+  margin-top: 10px;
+}
+.mint-sparrow-nft-view > .nft-list > .nft > .content > .reupload {
+  margin-top: 16px;
+  text-align: center;
+}
+.mint-sparrow-nft-view > .nft-list > .nft > .content > .reupload > h6 {
+  font-size: 14px;
+  margin-bottom: 3px;
 }
 

@@ -3,40 +3,94 @@
 
 
 .mint-sparrow-nft-view {
-    .form {
-        margin-top: 8px;
+    >header {
+        max-width: 600px;
+        margin   : auto;
 
-        input {
+        .form {
             margin-top: 8px;
-            padding   : 4px;
+
+            input {
+                margin-top: 8px;
+                padding   : 4px;
+            }
+        }
+
+        .danger {
+            color: @danger;
+        }
+
+        h5 {
+            margin    : 0px;
+            margin-top: 8px;
+        }
+
+        img {
+            height            : 200px;
+            -webkit-filter    : grayscale(100%);
+            filter            : grayscale(100%);
+            -webkit-transition: .3s ease-in-out;
+            transition        : .3s ease-in-out;
+        }
+
+        img:hover {
+            -webkit-filter: grayscale(0);
+            filter        : grayscale(0);
+        }
+
+        @keyframes rotate_image {
+            100% {
+                transform: rotate(360deg);
+            }
         }
     }
 
-    .danger {
-        color: @danger;
-    }
+    >.nft-list {
+        margin-top           : 20px;
+        display              : grid;
+        grid-template-columns: 25% 25% 25% 25%;
 
-    h5 {
-        margin    : 0px;
-        margin-top: 8px;
-    }
+        @media @phone {
+            grid-template-columns: 50% 50%;
+        }
 
-    img {
-        height            : 200px;
-        -webkit-filter    : grayscale(100%);
-        filter            : grayscale(100%);
-        -webkit-transition: .3s ease-in-out;
-        transition        : .3s ease-in-out;
-    }
+        >.nft {
+            padding    : 5px;
+            line-height: 1.2em;
 
-    img:hover {
-        -webkit-filter: grayscale(0);
-        filter        : grayscale(0);
-    }
+            >.content {
+                background   : #fff;
+                padding      : 10px;
+                border       : 1px solid #ccc;
+                border-radius: 5px;
+                word-break   : break-all;
 
-    @keyframes rotate_image {
-        100% {
-            transform: rotate(360deg);
+                >.title {
+                    font-size: 20px;
+                }
+
+                >img {
+                    display        : block;
+                    margin-top     : 10px;
+                    margin-bottom  : 10px;
+                    object-fit     : contain;
+                    object-position: 50% 50%;
+                }
+
+                >.description {
+                    margin-top: 10px;
+                }
+
+                >.reupload {
+                    margin-top: 16px;
+                    text-align: center;
+
+                    >h6 {
+                        font-size    : 14px;
+                        margin-bottom: 3px;
+                    }
+                }
+            }
         }
     }
 }
