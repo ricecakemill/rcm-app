@@ -70,7 +70,7 @@ export default class MintSparrowNFT implements View {
                                 setTimeout(async () => {
                                     if (this.dataURL !== undefined && id >= 0) {
                                         const signedMessage = await Wallet.signMessage("Upload SparrowNFT File");
-                                        await fetch(`https://api.ricecakemill.com/sparrow/nft/${id}/upload`, {
+                                        await fetch(`https://api.tteok.org/sparrow/nft/${id}/upload`, {
                                             method: "POST",
                                             body: JSON.stringify({
                                                 dataURL: this.dataURL,
@@ -129,7 +129,7 @@ export default class MintSparrowNFT implements View {
                                     reader.addEventListener("load", async () => {
                                         let dataURL = reader.result as string;
                                         const signedMessage = await Wallet.signMessage("Upload SparrowNFT File");
-                                        await fetch(`https://api.ricecakemill.com/sparrow/nft/${id}/upload`, {
+                                        await fetch(`https://api.tteok.org/sparrow/nft/${id}/upload`, {
                                             method: "POST",
                                             body: JSON.stringify({
                                                 dataURL,
