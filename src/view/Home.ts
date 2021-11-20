@@ -50,7 +50,7 @@ export default class Home implements View {
                         InjeolmiContract.address,
                         "IJM",
                         8,
-                        "https://raw.githubusercontent.com/ricecakemill/rcm-app/main/docs/images/injeolmi.png"
+                        "https://raw.githubusercontent.com/tteokmill/tteok-app/main/docs/images/injeolmi.png"
                     ),
                 }), "\n",
                 el("a", msg("INJEOLMI_CONTRACT_BUTTON"), {
@@ -58,7 +58,7 @@ export default class Home implements View {
                     target: "_blank",
                 }), "\n",
                 el("a", msg("INJEOLMI_SOURCE_CODE_BUTTON"), {
-                    href: "https://github.com/ricecakemill/injeolmi",
+                    href: "https://github.com/tteokmill/injeolmi",
                     target: "_blank",
                 }), "\n",
                 el("a", msg("INJEOLMI_CHART_BUTTON"), {
@@ -125,7 +125,7 @@ export default class Home implements View {
                 msg("WAREHOUSE_DESC_1"), "\n",
                 msg("WAREHOUSE_DESC_2"),
             ),
-            el("a", msg("WAREHOUSE_ADDRESS"), "\nhttps://opensea.io/ricecakemill", { href: "https://opensea.io/ricecakemill", target: "_blank" }),
+            el("a", msg("WAREHOUSE_ADDRESS"), "\nhttps://opensea.io/tteokmill", { href: "https://opensea.io/tteokmill", target: "_blank" }),
             el("h2", msg("SPARROW_NFT_TITLE")),
             el("p", msg("SPARROW_NFT_DESC")),
             el("img.art", { src: "/images/nft/nft.jpg" }),
@@ -142,7 +142,7 @@ export default class Home implements View {
             }),
             el("footer",
                 el("a", msg("TWITTER_BUTTON"), {
-                    href: "https://twitter.com/ricecakemill",
+                    href: "https://twitter.com/tteokmill",
                     target: "_blank",
                 }), "\n",
                 el("a", msg("KAKAOTALK_BUTTON"), {
