@@ -75,6 +75,7 @@ export default class MintSparrowNFT implements View {
                                             body: JSON.stringify({
                                                 dataURL: this.dataURL,
                                                 signedMessage,
+                                                extname: this.extnameInput.domElement.value,
                                             }),
                                         });
                                         alert("등록 완료!~!");
