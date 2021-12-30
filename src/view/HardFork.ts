@@ -14,7 +14,7 @@ export default class HardFork implements View {
             el("p", "나는 한다. 강한 풀! 나는 한다. 걸다! 나는 한다. 후원!"),
             el("a", { href: "https://medium.com/tteok/%EB%AC%BC%EB%A0%88%EB%B0%A9%EC%95%84-%ED%95%98%EB%93%9C%ED%8F%AC%ED%81%AC-%EC%9D%B8%EC%A0%88%EB%AF%B8-2-0-7bcfcd7f2b9a", target: "_blank" },
                 el("img", { src: "/images/hardInjeolmi.png" })),
-            el("a.button", "나는 한다. 나의 인절미를 기록.")
+            el("button", "나는 한다. 나의 인절미를 기록.")
         ).appendTo(BodyNode);
     }
 
