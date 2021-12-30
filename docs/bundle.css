@@ -474,4 +474,23 @@ footer {
   font-size: 14px;
   margin-bottom: 3px;
 }
+.hardfork-view {
+  max-width: 600px;
+  margin: auto;
+}
+.hardfork-view > h1 {
+  margin-top: 16px;
+  font-size: 3rem;
+}
+.hardfork-view > .button {
+  font-size: 32px;
+}
+.hardfork-view > a > img:hover {
+  transform: scale(3);
+}
+@media only screen and (max-width: 719px) {
+  .hardfork-view > a > img:hover {
+    transform: scale(2);
+  }
+}
 

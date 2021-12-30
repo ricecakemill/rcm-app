@@ -5,6 +5,7 @@ import BrowserInfo from "./BrowserInfo";
 import Wallet from "./klaytn/Wallet";
 import Home from "./view/Home";
 import MintSparrowNFT from "./view/MintSparrowNFT";
+import HardFork from "./view/HardFork"
 
 (async () => {
 
@@ -13,6 +14,7 @@ import MintSparrowNFT from "./view/MintSparrowNFT";
 
     SkyRouter.route("", Home);
     SkyRouter.route("mintnft", MintSparrowNFT);
+    SkyRouter.route("hardfork", HardFork);
 
     if (sessionStorage.__spa_path) {
         SkyRouter.go(sessionStorage.__spa_path);
