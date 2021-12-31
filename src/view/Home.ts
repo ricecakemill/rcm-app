@@ -28,6 +28,9 @@ export default class Home implements View {
 
     constructor() {
         this.container = el(".home-view",
+            el("a.hardfork-button", "하드포크 허기", {
+                click: () => ViewUtil.go("/hardpork"),
+            }),
             el("h1", msg("TITLE")),
             el("p",
                 msg("DESC_1"), "\n",

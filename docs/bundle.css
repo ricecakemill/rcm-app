@@ -397,6 +397,31 @@ footer {
   max-width: 600px;
   margin: auto;
 }
+.home-view > .hardfork-button {
+  font-family: ChosunGs;
+  font-size: 20px;
+  width: 100%;
+  margin-top: 8px;
+  margin-bottom: 50px;
+  height: 50px;
+  border: 2px solid black;
+  background-color: #be9f64;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  padding: 4px;
+  border-radius: 8px;
+}
+.home-view > .hardfork-button:hover {
+  animation-duration: 3s;
+  animation-name: rainbowLink;
+  animation-iteration-count: infinite;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+.home-view > .hardfork-button:active {
+  font-size: 1.25rem;
+}
 .mint-sparrow-nft-view > header {
   max-width: 600px;
   margin: auto;
@@ -486,14 +511,16 @@ footer {
   font-size: 32px;
 }
 .hardfork-view > a > img:hover {
-  transform: scale(2);
+  transform: scale(1.5);
 }
 .hardfork-view > button {
+  position: fixed;
+  left: calc(50% - 150px);
+  bottom: 20px;
   font-family: ChosunGs;
-  font-size: 0.875rem;
-  width: 100%;
-  margin-top: 8px;
-  height: 32px;
+  font-size: 20px;
+  width: 300px;
+  height: 50px;
   border: 2px solid black;
   background-color: #be9f64;
   display: flex;

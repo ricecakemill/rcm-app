@@ -5,8 +5,10 @@ export default class MintSparrowNFT implements View {
     private nameInput;
     private descriptionInput;
     private amountInput;
+    private nftList;
     private dataURL;
     constructor();
+    private loadNFTs;
     changeParams(params: ViewParams, uri: string): void;
     close(): void;
 }

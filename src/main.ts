@@ -14,7 +14,7 @@ import HardFork from "./view/HardFork"
 
     SkyRouter.route("", Home);
     SkyRouter.route("mintnft", MintSparrowNFT);
-    SkyRouter.route("hardfork", HardFork);
+    SkyRouter.route("hardpork", HardFork);
 
     if (sessionStorage.__spa_path) {
         SkyRouter.go(sessionStorage.__spa_path);
