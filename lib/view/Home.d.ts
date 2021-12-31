@@ -3,7 +3,6 @@ export default class Home implements View {
     private container;
     private interval;
     private priceDisplay;
-    private airdropDisplay;
     private firstcomeAirdropEvent;
     private ijmPrice;
     private buyInput;

@@ -16,7 +16,7 @@ export default class Home implements View {
     private interval: any;
 
     private priceDisplay: DomNode;
-    private airdropDisplay: DomNode;
+    //private airdropDisplay: DomNode;
     private firstcomeAirdropEvent: DomNode;
     private ijmPrice: BigNumber = BigNumber.from(0);
 
@@ -47,7 +47,7 @@ export default class Home implements View {
                 href: "https://chrome.google.com/webstore/detail/kaikas/jblndlipeogpafnldhgmapagcccfchpi",
                 target: "_blank",
             }),
-            el(".links",
+            /*el(".links",
                 el("a", msg("ADD_INJEOLMI_TO_WALLET_BUTTON"), {
                     click: () => Wallet.addToken(
                         InjeolmiContract.address,
@@ -69,15 +69,17 @@ export default class Home implements View {
                     target: "_blank",
                 }),
             ),
-            el("p.warning", msg("WRONG_TRANSFER_WARNING")),
+            el("p.warning", msg("WRONG_TRANSFER_WARNING")),*/
             el(".card",
-                el("h5", msg("INJEOLMI_PRICE")),
-                el("h6", (this.priceDisplay = el("span.price", "...")), " KLAY\n"),
-                el("h5", msg("INJEOLMI_AIRDROP_AMOUNT")),
-                el("h6", (this.airdropDisplay = el("span.price", "...")), " IJM\n"),
+                el("h5", "하드포크 전 최종 인절미 가격"),
+                el("h6", "0.144374553246136709 KLAY\n"),
+                //el("h5", msg("INJEOLMI_PRICE")),
+                //el("h6", (this.priceDisplay = el("span.price", "...")), " KLAY\n"),
+                //el("h5", msg("INJEOLMI_AIRDROP_AMOUNT")),
+                //el("h6", (this.airdropDisplay = el("span.price", "...")), " IJM\n"),
                 (this.firstcomeAirdropEvent = el(".event")),
             ),
-            el("h3", msg("BUY_INJEOLMI_TITLE")),
+            /*el("h3", msg("BUY_INJEOLMI_TITLE")),
             el("p", msg("BUY_INJEOLMI_DESC")),
             el(".form",
                 this.buyInput = el("input", {
@@ -122,7 +124,7 @@ export default class Home implements View {
                         );
                     },
                 })
-            ),
+            ),*/
             el("h2", msg("WAREHOUSE_TITLE")),
             el("p",
                 msg("WAREHOUSE_DESC_1"), "\n",
@@ -168,8 +170,8 @@ export default class Home implements View {
         );
 
         if (this.container.deleted !== true) {
-            this.priceDisplay.empty().appendText(utils.formatEther(this.ijmPrice));
-            this.airdropDisplay.empty().appendText(utils.formatUnits(airdropBalance, 8));
+            //this.priceDisplay.empty().appendText(utils.formatEther(this.ijmPrice));
+            //this.airdropDisplay.empty().appendText(utils.formatUnits(airdropBalance, 8));
         }
 
         // 이벤트 진행중?
