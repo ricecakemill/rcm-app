@@ -145,6 +145,11 @@ export default class Home implements View {
                 href: "https://flappy-injeolmi.netlify.app/",
                 target: "_blank",
             }),
+            el("img", { src: "/images/game/snake.png", height: "300" }),
+            el("a.game-link", msg("FANGAME_2_BUTTON"), {
+                href: "https://injeolmi-snake.netlify.app/",
+                target: "_blank",
+            }),
             el("footer",
                 el("a", msg("TWITTER_BUTTON"), {
                     href: "https://twitter.com/tteokmill",
