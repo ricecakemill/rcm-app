@@ -507,6 +507,11 @@ footer {
   margin-top: 16px;
   font-size: 3rem;
 }
+.hardfork-view > .done {
+  margin-top: 16px;
+  font-size: 32px;
+  color: red;
+}
 .hardfork-view > .button {
   font-size: 32px;
 }

@@ -7,12 +7,14 @@ import ViewUtil from "./ViewUtil";
 export default class HardFork implements View {
 
     private container: DomNode;
+    private ddd: DomNode;
     private interval: any;
 
     constructor() {
         this.container = el(".hardfork-view",
             el("a", "< 뒤로가기", { click: () => ViewUtil.go("/") }),
             el("h1", "안녕하신가?\n 힘세고 강한 아침,\n 만일 내게 물어보면\n 나는 물레방아 하드포크"),
+            this.ddd = el(".done"),
             el("p", "나는 한다. 강한 풀! 나는 한다. 딱풀!"),
             el("p.warning", "절대로 하드포크 도중에 인절미를 다른 지갑에 옮겨선 안됨!!! 모두 잃어버릴 수 있음!!!"),
             el("a", { href: "https://medium.com/tteok/%EB%AC%BC%EB%A0%88%EB%B0%A9%EC%95%84-%ED%95%98%EB%93%9C%ED%8F%AC%ED%81%AC-%EC%9D%B8%EC%A0%88%EB%AF%B8-2-0-7bcfcd7f2b9a", target: "_blank" },
@@ -36,6 +38,16 @@ export default class HardFork implements View {
                 },
             })
         ).appendTo(BodyNode);
+        this.load();
+    }
+
+    private async load() {
+        const owner = await Wallet.loadAddress();
+        if (owner !== undefined) {
+            if ((await ArkContract.records(owner)).gt(0)) {
+                this.ddd.empty().appendText("참새야! 너 이미 기록했어! 걱정 안해도 뎌! 4일에서 6일 사이에 다시와서 이전 꼭 해!!");
+            }
+        }
     }
 
     public changeParams(params: ViewParams, uri: string): void { }
