@@ -38,7 +38,9 @@ export default class HardFork implements View {
                 },
             })
         ).appendTo(BodyNode);
+
         this.load();
+        Wallet.on("connect", () => this.load());
     }
 
     private async load() {
