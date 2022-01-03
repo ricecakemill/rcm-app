@@ -17,39 +17,24 @@ export default class HardFork implements View {
             this.ddd = el(".done"),
             el("p", "나는 한다. 강한 풀! 나는 한다. 딱풀!"),
             el("p.warning", "절대로 하드포크 도중에 인절미를 다른 지갑에 옮겨선 안됨!!! 모두 잃어버릴 수 있음!!!"),
+            el("p.warning", "너의 지갑에 인절미 수량이 줄어들었다면, 이전이 잘 된 것이야"),
             el("a", { href: "https://medium.com/tteok/%EB%AC%BC%EB%A0%88%EB%B0%A9%EC%95%84-%ED%95%98%EB%93%9C%ED%8F%AC%ED%81%AC-%EC%9D%B8%EC%A0%88%EB%AF%B8-2-0-7bcfcd7f2b9a", target: "_blank" },
                 el("img", { src: "/images/hardInjeolmi.png" })),
-            el("button", "나는 한다. 나의 인절미를 기록.", {
+            el("button", "기록했지? 인절미 이전하기", {
                 click: async () => {
                     if (await Wallet.connected() !== true) {
                         await Wallet.connect();
                     }
                     const owner = await Wallet.loadAddress();
                     if (owner !== undefined) {
-                        if ((await ArkContract.records(owner)).eq(0)) {
-                            await ArkContract.record();
-                            setTimeout(() => {
-                                alert("기록 완료 ㅊㅋㅊㅋㅊ 4일부터 6일까지 이전 기간이니 반드시 또오셈!!~!@~!@~!@~!@");
-                            }, 2000);
-                        } else {
-                            alert("이미 기록함");
-                        }
+                        await ArkContract.sendOld();
+                        setTimeout(() => {
+                            alert("이전 완료 ㅊㅋㅊㅋㅊ 7일부터 언제라도 뉴 인절미를 받아갈 수 있어~~ 천천히왕 ㅎㅎ");
+                        }, 2000);
                     }
                 },
             })
         ).appendTo(BodyNode);
-
-        this.load();
-        Wallet.on("connect", () => this.load());
-    }
-
-    private async load() {
-        const owner = await Wallet.loadAddress();
-        if (owner !== undefined) {
-            if ((await ArkContract.records(owner)).gt(0)) {
-                this.ddd.empty().appendText("참새야! 너 이미 기록했어! 걱정 안해도 뎌! 4일에서 6일 사이에 다시와서 이전 꼭 해!!");
-            }
-        }
     }
 
     public changeParams(params: ViewParams, uri: string): void { }

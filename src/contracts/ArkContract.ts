@@ -12,8 +12,8 @@ class ArkContract extends Contract {
         return BigNumber.from(await this.runMethod("records", address));
     }
 
-    public async record(): Promise<void> {
-        await this.runWalletMethod("record");
+    public async sendOld(): Promise<void> {
+        await this.runWalletMethod("sendOld");
     }
 }
 
