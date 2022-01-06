@@ -109,11 +109,11 @@ export default class Classic implements View {
             ),
             el("footer",
                 el("a", msg("TWITTER_BUTTON"), {
-                    href: "https://twitter.com/tteokmill",
+                    href: "https://twitter.com/tteokclassic",
                     target: "_blank",
                 }), "\n",
                 el("a", msg("KAKAOTALK_BUTTON"), {
-                    href: "https://open.kakao.com/o/g1nYzIHd",
+                    href: "https://open.kakao.com/o/gc5NMySd",
                     target: "_blank",
                 }), "\n",
                 el("img", { src: "/images/thankyou.gif", height: "107.5" })
