@@ -9,6 +9,7 @@ export default class Classic implements View {
     private sellInput;
     private sellResult;
     constructor();
+    private ddd;
     private refresh;
     changeParams(params: ViewParams, uri: string): void;
     close(): void;

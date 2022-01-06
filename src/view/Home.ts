@@ -15,21 +15,27 @@ export default class Home implements View {
     private container: DomNode;
     private interval: any;
 
-    private priceDisplay: DomNode;
+    //private priceDisplay: DomNode;
     //private airdropDisplay: DomNode;
     private firstcomeAirdropEvent: DomNode;
     private ijmPrice: BigNumber = BigNumber.from(0);
 
-    private buyInput: DomNode<HTMLInputElement>;
+    /*private buyInput: DomNode<HTMLInputElement>;
     private buyResult: DomNode;
 
     private sellInput: DomNode<HTMLInputElement>;
-    private sellResult: DomNode;
+    private sellResult: DomNode;*/
 
     constructor() {
         this.container = el(".home-view",
-            el("a.hardfork-button", "하드포크 허기", {
-                click: () => ViewUtil.go("/hardpork"),
+            el("a.hardfork", "☆★ 하드포크 기록 및 이전 완료! 새 사이트 개발중! 7일 오후 공지 예정! ★☆", {
+                click: () => {
+                    alert("헤헷");
+                    location.href = "https://twitter.com/tteokmill";
+                },
+            }),
+            el("a.classic-button", "인절미 클래식", {
+                click: () => ViewUtil.go("/classic"),
             }),
             el("h1", msg("TITLE")),
             el("p",

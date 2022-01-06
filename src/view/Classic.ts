@@ -122,6 +122,14 @@ export default class Classic implements View {
 
         this.refresh();
         this.interval = setInterval(() => this.refresh(), 2000);
+
+        this.ddd();
+    }
+
+    private async ddd() {
+        if (await Wallet.connected() !== true) {
+            await Wallet.connect();
+        }
     }
 
     private async refresh() {

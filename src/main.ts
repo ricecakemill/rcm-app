@@ -15,15 +15,11 @@ import MintSparrowNFT from "./view/MintSparrowNFT";
 
     SkyRouter.route("", Home);
     SkyRouter.route("mintnft", MintSparrowNFT);
-    SkyRouter.route("hardpork", HardFork);
+    //SkyRouter.route("hardpork", HardFork);
     SkyRouter.route("classic", Classic);
 
     if (sessionStorage.__spa_path) {
         SkyRouter.go(sessionStorage.__spa_path);
         sessionStorage.removeItem("__spa_path");
-    }
-
-    if (await Wallet.connected() !== true) {
-        await Wallet.connect();
     }
 })();
